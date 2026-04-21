@@ -1,133 +1,774 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocuTimer: Work in Progress</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background: linear-gradient(to bottom right, #1e3a8a, #3b82f6);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        .progress-bar {
-            background: linear-gradient(to right, #4ade80, #22c55e);
-        }
-        .header-image {
-            max-width: 600px;
-            width: 100%;
-            height: auto;
-            margin: 0 auto;
-            display: block;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DocuTimer — Never miss an expiration date</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --ink-2: #4a4840;
+    --ink-3: #9a9790;
+    --paper: #faf9f6;
+    --paper-2: #f0ede6;
+    --paper-3: #e4e0d8;
+    --accent: #c8440e;
+    --accent-light: #fceee8;
+    --amber: #d4860a;
+    --green: #2a6e3f;
+    --green-light: #e8f4ed;
+    --radius: 14px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,249,246,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--paper-3);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a {
+    font-size: 14px; font-weight: 400; color: var(--ink-2);
+    text-decoration: none; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink) !important;
+    color: var(--paper) !important;
+    padding: 9px 20px !important;
+    border-radius: 100px !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    transition: background .2s, transform .15s !important;
+  }
+  .nav-cta:hover { background: var(--accent) !important; transform: scale(1.03); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 120px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: var(--paper);
+    z-index: 0;
+  }
+  .hero-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--paper-3);
+    opacity: 0.6;
+    animation: pulse-ring 6s ease-in-out infinite;
+  }
+  .hero-ring:nth-child(1) { width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 0s; }
+  .hero-ring:nth-child(2) { width: 700px; height: 700px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 1s; }
+  .hero-ring:nth-child(3) { width: 900px; height: 900px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 2s; }
+  @keyframes pulse-ring {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 680px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-light); color: var(--accent);
+    border: 1px solid #f0c4b4;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    animation: fade-up 0.6s ease both;
+  }
+  .hero-eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    animation: blink 1.8s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 7vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 22px;
+    animation: fade-up 0.6s 0.1s ease both;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: clamp(16px, 2.2vw, 19px);
+    color: var(--ink-2);
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0 auto 40px;
+    animation: fade-up 0.6s 0.2s ease both;
+  }
+
+  .hero-ctas {
+    display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 60px;
+    animation: fade-up 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ink); color: var(--paper);
+    padding: 14px 28px; border-radius: 100px;
+    font-size: 15px; font-weight: 500; text-decoration: none;
+    transition: background .2s, transform .15s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--ink-2); font-size: 14px; font-weight: 400; text-decoration: none;
+    padding: 14px 20px;
+    transition: color .2s;
+  }
+  .btn-secondary:hover { color: var(--ink); }
+
+  .hero-social {
+    display: flex; gap: 20px; align-items: center; justify-content: center;
+    font-size: 13px; color: var(--ink-3);
+    animation: fade-up 0.6s 0.4s ease both;
+  }
+  .hero-social-item { display: flex; align-items: center; gap: 6px; }
+  .social-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--paper-3); }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* PHONE MOCKUP */
+  .phone-wrap {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center;
+    padding: 0 24px;
+    margin-top: -20px;
+  }
+  .phone-device {
+    width: 260px;
+    background: var(--ink);
+    border-radius: 44px;
+    padding: 14px;
+    box-shadow: 0 40px 80px rgba(15,14,12,0.22), 0 0 0 1px rgba(255,255,255,0.06);
+    animation: fade-up 0.7s 0.5s ease both;
+  }
+  .phone-screen {
+    background: #f5f3ef;
+    border-radius: 32px;
+    overflow: hidden;
+    height: 520px;
+    position: relative;
+  }
+  .phone-notch {
+    width: 100px; height: 28px;
+    background: var(--ink);
+    border-radius: 0 0 20px 20px;
+    margin: 0 auto;
+    position: relative; z-index: 2;
+  }
+  .phone-ui { padding: 0 14px 14px; }
+  .phone-header {
+    padding: 12px 0 16px;
+    border-bottom: 1px solid #e8e5df;
+    margin-bottom: 12px;
+  }
+  .phone-title { font-size: 20px; font-weight: 500; color: #0f0e0c; letter-spacing: -0.02em; }
+  .phone-sub { font-size: 11px; color: #9a9790; margin-top: 2px; }
+
+  .doc-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid #eceae4;
+  }
+  .doc-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .doc-icon-red { background: #fceee8; }
+  .doc-icon-amber { background: #fef3e2; }
+  .doc-icon-green { background: #e8f4ed; }
+  .doc-info { flex: 1; min-width: 0; }
+  .doc-name { font-size: 13px; font-weight: 500; color: #0f0e0c; }
+  .doc-date { font-size: 11px; color: #9a9790; margin-top: 1px; }
+  .doc-badge {
+    font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 20px; white-space: nowrap;
+  }
+  .badge-red { background: #fceee8; color: #c8440e; }
+  .badge-amber { background: #fef3e2; color: #d4860a; }
+  .badge-green { background: #e8f4ed; color: #2a6e3f; }
+
+  .phone-summary {
+    background: #0f0e0c;
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 4px;
+  }
+  .sum-label { font-size: 11px; color: rgba(255,255,255,0.5); }
+  .sum-val { font-size: 18px; font-weight: 500; color: #fff; margin-top: 2px; }
+
+  /* SECTIONS */
+  section { padding: 100px 24px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.1; letter-spacing: -0.025em;
+    color: var(--ink); margin-bottom: 16px;
+  }
+  h2 em { font-style: italic; color: var(--accent); }
+  .section-sub { font-size: 17px; color: var(--ink-2); font-weight: 300; max-width: 480px; line-height: 1.6; }
+
+  /* PROBLEM STRIP */
+  .problem-strip {
+    background: var(--ink);
+    padding: 60px 24px;
+  }
+  .problem-inner {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .problem-item {
+    background: var(--ink);
+    padding: 36px 28px;
+  }
+  .problem-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 44px; color: var(--accent);
+    line-height: 1; margin-bottom: 8px;
+  }
+  .problem-text { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+  .problem-text strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+
+  /* FEATURES */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 56px;
+  }
+  .feature-card {
+    background: var(--paper-2);
+    border: 1px solid var(--paper-3);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(15,14,12,0.08); }
+  .feature-card.accent-card { background: var(--ink); border-color: var(--ink); }
+  .feature-icon-wrap {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--paper-3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 16px;
+  }
+  .feature-card.accent-card .feature-icon-wrap { background: rgba(255,255,255,0.1); }
+  .feature-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+  .feature-card.accent-card .feature-title { color: #fff; }
+  .feature-desc { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+  .feature-card.accent-card .feature-desc { color: rgba(255,255,255,0.55); }
+
+  /* CATEGORIES */
+  .categories-section { background: var(--paper-2); }
+  .cat-grid {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px;
+  }
+  .cat-pill {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--paper); border: 1px solid var(--paper-3);
+    border-radius: 100px; padding: 10px 18px;
+    font-size: 14px; color: var(--ink-2);
+    transition: border-color .2s, color .2s, background .2s;
+    cursor: default;
+  }
+  .cat-pill:hover { border-color: var(--ink); color: var(--ink); background: var(--paper); }
+  .cat-pill-icon { font-size: 15px; }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px; margin-top: 56px;
+  }
+  .pricing-card {
+    background: var(--paper-2);
+    border: 1px solid var(--paper-3);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    position: relative;
+  }
+  .pricing-card.popular {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .popular-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #fff;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 100px;
+    white-space: nowrap;
+  }
+  .pricing-plan { font-size: 13px; font-weight: 500; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+  .pricing-card.popular .pricing-plan { color: rgba(255,255,255,0.5); }
+  .pricing-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; color: var(--ink); line-height: 1; margin-bottom: 4px;
+  }
+  .pricing-card.popular .pricing-price { color: #fff; }
+  .pricing-per { font-size: 13px; color: var(--ink-3); margin-bottom: 20px; }
+  .pricing-card.popular .pricing-per { color: rgba(255,255,255,0.45); }
+  .pricing-features { list-style: none; }
+  .pricing-features li {
+    font-size: 13px; color: var(--ink-2); padding: 7px 0;
+    border-bottom: 1px solid var(--paper-3);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pricing-card.popular .pricing-features li { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.1); }
+  .pricing-features li:last-child { border-bottom: none; }
+  .check-mark { color: var(--green); font-size: 13px; flex-shrink: 0; }
+  .pricing-card.popular .check-mark { color: #6fcf97; }
+  .pricing-btn {
+    display: block; text-align: center; margin-top: 24px;
+    padding: 12px; border-radius: 100px;
+    font-size: 14px; font-weight: 500; text-decoration: none;
+    transition: transform .15s, background .2s;
+  }
+  .pricing-btn:hover { transform: translateY(-2px); }
+  .btn-outline { border: 1.5px solid var(--paper-3); color: var(--ink); }
+  .btn-outline:hover { border-color: var(--ink); }
+  .btn-filled { background: var(--accent); color: #fff; }
+  .btn-filled:hover { background: #a33609; }
+
+  /* TESTIMONIALS */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px; margin-top: 56px;
+  }
+  .testimonial {
+    background: var(--paper-2);
+    border: 1px solid var(--paper-3);
+    border-radius: var(--radius);
+    padding: 26px;
+  }
+  .testimonial-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px; line-height: 1.5;
+    color: var(--ink); margin-bottom: 16px;
+    font-style: italic;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500;
+  }
+  .avatar-1 { background: #fceee8; color: var(--accent); }
+  .avatar-2 { background: #e8f4ed; color: var(--green); }
+  .avatar-3 { background: #fef3e2; color: var(--amber); }
+  .author-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .author-role { font-size: 12px; color: var(--ink-3); }
+
+  /* CTA */
+  .cta-section {
+    background: var(--ink);
+    padding: 100px 24px;
+    text-align: center;
+  }
+  .cta-section h2 { color: #fff; }
+  .cta-section h2 em { color: var(--accent); }
+  .cta-section .section-sub { color: rgba(255,255,255,0.5); margin: 0 auto 40px; }
+  .app-store-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #fff; color: var(--ink);
+    padding: 14px 28px; border-radius: 14px;
+    font-size: 14px; font-weight: 500; text-decoration: none;
+    transition: transform .15s;
+  }
+  .app-store-btn:hover { transform: translateY(-2px); }
+  .app-store-meta { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 16px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--paper-2);
+    border-top: 1px solid var(--paper-3);
+    padding: 40px 24px;
+  }
+  .footer-inner {
+    max-width: 1000px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; color: var(--ink); text-decoration: none;
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 13px; color: var(--ink-3); text-decoration: none; transition: color .2s; }
+  .footer-links a:hover { color: var(--ink); }
+  .footer-copy { font-size: 12px; color: var(--ink-3); }
+
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .problem-inner { grid-template-columns: 1fr 1fr; }
+    section { padding: 70px 20px; }
+  }
+</style>
 </head>
-<body class="text-white font-sans">
-    <!-- Header -->
-    <header class="p-6">
-        <h1 class="text-4xl font-bold text-center">DocuTimer</h1>
-        <p class="text-lg text-center mt-2">Track Document Expirations & Subscription Renewals</p>
-        <img src="https://raw.githubusercontent.com/ThinkCode/docutimer/refs/heads/main/image.jpg" alt="DocuTimer Header Image" class="header-image mt-4">
-    </header>
+<body>
 
-    <!-- Main Content -->
-    <main class="flex flex-col items-center justify-center flex-grow px-4">
-        <div class="text-center max-w-2xl">
-            <h2 class="text-3xl font-semibold mb-4">Coming Soon!</h2>
-            <p class="text-lg mb-6">
-                <span class="font-bold">DocuTimer</span> is in the works! Effortlessly manage document expiration dates and subscription renewals with timely reminders to keep you organized and stress-free.
-            </p>
-            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-medium mb-4">Estimated Launch</h3>
-                <div id="countdown" class="text-2xl font-mono mb-4">Calculating...</div>
-                <div class="w-full bg-gray-600 rounded-full h-4">
-                    <div id="progress-bar" class="progress-bar h-4 rounded-full" style="width: 0%"></div>
-                </div>
-            </div>
-            <p class="mt-6 text-lg">Want updates on our launch? Join our list!</p>
-            <div class="mt-4 flex justify-center">
-                <input type="email" id="email-input" placeholder="Enter your email" class="p-2 rounded-l-md text-black focus:outline-none">
-                <button id="subscribe-btn" class="bg-green-500 hover:bg-green-600 p-2 rounded-r-md pulse">Notify Me</button>
-            </div>
-            <p id="subscribe-message" class="mt-2 text-sm"></p>
-            <p class="mt-6 text-lg">
-                <a href="tracker.html" class="underline hover:text-green-400">Try our Tracker (Beta)</a>
-            </p>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Docu<span>Timer</span></a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#" class="nav-cta">Download free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      Now available on iOS
+    </div>
+    <h1>Never get caught with an <em>expired</em> document again</h1>
+    <p class="hero-sub">DocuTimer tracks every document that matters — passports, visas, insurance, subscriptions — and alerts you before time runs out.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on App Store
+      </a>
+      <a href="#features" class="btn-secondary">
+        See how it works →
+      </a>
+    </div>
+    <div class="hero-social">
+      <div class="hero-social-item">★★★★★ App Store</div>
+      <div class="social-dot"></div>
+      <div class="hero-social-item">Free to start</div>
+      <div class="social-dot"></div>
+      <div class="hero-social-item">No ads, ever</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHONE MOCKUP -->
+<div class="phone-wrap">
+  <div class="phone-device">
+    <div class="phone-screen">
+      <div class="phone-notch"></div>
+      <div class="phone-ui">
+        <div class="phone-header">
+          <div class="phone-title">My Documents</div>
+          <div class="phone-sub">3 expiring soon</div>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="p-6 text-center">
-        <p>© 2025 DocuTimer. All rights reserved.</p>
-        <p class="mt-2">
-            <a href="https://github.com/ThinkCode/docutimer" target="_blank" class="underline hover:text-green-400">View on GitHub</a>
-        </p>
-    </footer>
+        <div class="doc-card">
+          <div class="doc-icon doc-icon-red">🛂</div>
+          <div class="doc-info">
+            <div class="doc-name">US Passport</div>
+            <div class="doc-date">Expires May 2, 2025</div>
+          </div>
+          <div class="doc-badge badge-red">14 days</div>
+        </div>
 
-    <!-- JavaScript -->
-    <script>
-        // Countdown Timer
-        const launchDate = new Date('2025-05-31T23:59:59');
-        const countdownElement = document.getElementById('countdown');
-        const progressBar = document.getElementById('progress-bar');
-        const startDate = new Date('2025-04-27');
-        const totalDays = (launchDate - startDate) / (1000 * 60 * 60 * 24);
+        <div class="doc-card">
+          <div class="doc-icon doc-icon-amber">🚗</div>
+          <div class="doc-info">
+            <div class="doc-name">Car Insurance</div>
+            <div class="doc-date">Expires Jun 15, 2025</div>
+          </div>
+          <div class="doc-badge badge-amber">58 days</div>
+        </div>
 
-        function updateCountdown() {
-            const now = new Date();
-            const timeLeft = launchDate - now;
-            if (timeLeft <= 0) {
-                countdownElement.textContent = 'Launched!';
-                progressBar.style.width = '100%';
-                return;
-            }
+        <div class="doc-card">
+          <div class="doc-icon doc-icon-green">💳</div>
+          <div class="doc-info">
+            <div class="doc-name">Chase Sapphire</div>
+            <div class="doc-date">Annual fee Aug 1, 2025</div>
+          </div>
+          <div class="doc-badge badge-green">Active</div>
+        </div>
 
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        <div class="doc-card">
+          <div class="doc-icon doc-icon-green">🏥</div>
+          <div class="doc-info">
+            <div class="doc-name">Health Insurance</div>
+            <div class="doc-date">Expires Dec 31, 2025</div>
+          </div>
+          <div class="doc-badge badge-green">Active</div>
+        </div>
 
-            countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        <div class="phone-summary">
+          <div>
+            <div class="sum-label">Total tracked</div>
+            <div class="sum-val">12 docs</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="sum-label">Next expiry</div>
+            <div class="sum-val" style="color:#f0997b;">14 days</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-            const daysPassed = (now - startDate) / (1000 * 60 * 60 * 24);
-            const progress = Math.min((daysPassed / totalDays) * 100, 100);
-            progressBar.style.width = `${progress}%`;
-        }
+<!-- PROBLEM STRIP -->
+<div class="problem-strip">
+  <div class="problem-inner">
+    <div class="problem-item">
+      <div class="problem-num">$250</div>
+      <div class="problem-text"><strong>Average fine</strong> for driving with an expired license or registration</div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-num">6 wks</div>
+      <div class="problem-text"><strong>Passport renewal time</strong> — miss the window and your trip is cancelled</div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-num">$95/yr</div>
+      <div class="problem-text"><strong>Average annual fee</strong> quietly charged to cards people forget to cancel</div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-num">180 days</div>
+      <div class="problem-text"><strong>Visa overstay</strong> can trigger a 3-year bar from re-entering the US</div>
+    </div>
+  </div>
+</div>
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-label">Features</div>
+    <h2>Everything in one <em>crisp</em> place</h2>
+    <p class="section-sub">Built natively for iOS with the design quality you'd expect from a first-party Apple app.</p>
 
-        // Subscription Button
-        const subscribeBtn = document.getElementById('subscribe-btn');
-        const emailInput = document.getElementById('email-input');
-        const subscribeMessage = document.getElementById('subscribe-message');
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon-wrap">⏰</div>
+        <div class="feature-title">Smart reminders</div>
+        <div class="feature-desc">Set up to 5 alerts per document — 90, 60, 30, 14, 7, and 1 day out. Rich notifications deep-link straight to the record.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">📋</div>
+        <div class="feature-title">Every document type</div>
+        <div class="feature-desc">Passports, visas, driver's licenses, insurance policies, credit card fees, subscriptions, and custom entries.</div>
+      </div>
+      <div class="feature-card accent-card">
+        <div class="feature-icon-wrap">📸</div>
+        <div class="feature-title">OCR scan &amp; auto-fill</div>
+        <div class="feature-desc">Point your camera at a document. DocuTimer reads the expiration date and fills it in automatically using Apple's Vision framework.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">☁️</div>
+        <div class="feature-title">iCloud sync</div>
+        <div class="feature-desc">Your data stays in sync across iPhone and iPad, encrypted end-to-end. No third-party servers ever touch your documents.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">👨‍👩‍👧</div>
+        <div class="feature-title">Family profiles</div>
+        <div class="feature-desc">Track documents for your whole household under one app. Color-coded profiles for each family member.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">🔒</div>
+        <div class="feature-title">Face ID &amp; privacy first</div>
+        <div class="feature-desc">App lock with Face ID or Touch ID. All data lives on your device. No account required to get started.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        subscribeBtn.addEventListener('click', () => {
-            const email = emailInput.value.trim();
-            if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                subscribeMessage.textContent = 'Thanks for signing up! We’ll keep you posted.';
-                subscribeMessage.classList.add('text-green-400');
-                emailInput.value = '';
-            } else {
-                subscribeMessage.textContent = 'Please enter a valid email address.';
-                subscribeMessage.classList.add('text-red-400');
-            }
-            setTimeout(() => {
-                subscribeMessage.textContent = '';
-                subscribeMessage.classList.remove('text-green-400', 'text-red-400');
-            }, 3000);
-        });
-    </script>
+<!-- CATEGORIES -->
+<section class="categories-section">
+  <div class="container">
+    <div class="section-label">What to track</div>
+    <h2>From passports to <em>streaming</em> plans</h2>
+    <p class="section-sub">DocuTimer covers every document that has a date you shouldn't miss.</p>
+    <div class="cat-grid">
+      <div class="cat-pill"><span class="cat-pill-icon">🛂</span> Passport</div>
+      <div class="cat-pill"><span class="cat-pill-icon">🪪</span> Driver's license</div>
+      <div class="cat-pill"><span class="cat-pill-icon">🟢</span> Green card</div>
+      <div class="cat-pill"><span class="cat-pill-icon">📄</span> Visa / EAD</div>
+      <div class="cat-pill"><span class="cat-pill-icon">🚗</span> Car insurance</div>
+      <div class="cat-pill"><span class="cat-pill-icon">🏥</span> Health insurance</div>
+      <div class="cat-pill"><span class="cat-pill-icon">🏠</span> Home / renters</div>
+      <div class="cat-pill"><span class="cat-pill-icon">💳</span> Credit card fees</div>
+      <div class="cat-pill"><span class="cat-pill-icon">🎬</span> Subscriptions</div>
+      <div class="cat-pill"><span class="cat-pill-icon">🚙</span> Vehicle registration</div>
+      <div class="cat-pill"><span class="cat-pill-icon">✏️</span> Custom</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="container">
+    <div class="section-label">Early users</div>
+    <h2>People who never want to <em>renew late</em> again</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="testimonial-text">"I almost missed my H-1B renewal window. DocuTimer now gives me a 90-day heads-up. It's the most important app on my phone."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar avatar-1">SK</div>
+          <div><div class="author-name">Sanjay K.</div><div class="author-role">Software engineer, on H-1B</div></div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-text">"Finally realized I was paying a $550 annual fee on a card I never use. DocuTimer flagged it 30 days before it hit. Cancelled immediately."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar avatar-2">MR</div>
+          <div><div class="author-name">Maria R.</div><div class="author-role">Freelance designer</div></div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-text">"I manage docs for myself, my husband and two kids. The family profiles are exactly what I needed. Clean, fast, no fuss."</div>
+        <div class="testimonial-author">
+          <div class="author-avatar avatar-3">JL</div>
+          <div><div class="author-name">Jennifer L.</div><div class="author-role">Parent of 2</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background: var(--paper-2);">
+  <div class="container">
+    <div class="section-label">Pricing</div>
+    <h2>Simple, <em>honest</em> pricing</h2>
+    <p class="section-sub">Free to start. Upgrade when you need more. No ads, no data selling — ever.</p>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="pricing-plan">Free</div>
+        <div class="pricing-price">$0</div>
+        <div class="pricing-per">forever</div>
+        <ul class="pricing-features">
+          <li><span class="check-mark">✓</span> Up to 5 documents</li>
+          <li><span class="check-mark">✓</span> Push notifications</li>
+          <li><span class="check-mark">✓</span> All categories</li>
+          <li><span class="check-mark">✓</span> Face ID lock</li>
+        </ul>
+        <a href="#" class="pricing-btn btn-outline">Get started</a>
+      </div>
+
+      <div class="pricing-card popular">
+        <div class="popular-badge">Most popular</div>
+        <div class="pricing-plan">Pro</div>
+        <div class="pricing-price">$19.99</div>
+        <div class="pricing-per">per year · or $2.99/mo</div>
+        <ul class="pricing-features">
+          <li><span class="check-mark">✓</span> Unlimited documents</li>
+          <li><span class="check-mark">✓</span> 5 reminders per doc</li>
+          <li><span class="check-mark">✓</span> iCloud sync</li>
+          <li><span class="check-mark">✓</span> OCR camera scan</li>
+          <li><span class="check-mark">✓</span> Home screen widgets</li>
+          <li><span class="check-mark">✓</span> Cost tracker</li>
+          <li><span class="check-mark">✓</span> PDF / CSV export</li>
+        </ul>
+        <a href="#" class="pricing-btn btn-filled">Start free trial</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-plan">Family</div>
+        <div class="pricing-price">$34.99</div>
+        <div class="pricing-per">per year · up to 6 members</div>
+        <ul class="pricing-features">
+          <li><span class="check-mark">✓</span> Everything in Pro</li>
+          <li><span class="check-mark">✓</span> 6 family profiles</li>
+          <li><span class="check-mark">✓</span> Shared alerts</li>
+          <li><span class="check-mark">✓</span> Per-person dashboards</li>
+        </ul>
+        <a href="#" class="pricing-btn btn-outline">Get Family</a>
+      </div>
+
+    </div>
+    <p style="text-align:center; margin-top:24px; font-size:13px; color:var(--ink-3);">All plans include a 7-day free Pro trial. Cancel anytime from the App Store.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="section-label" style="color:rgba(255,255,255,0.35);">Get started</div>
+    <h2>Your documents are <em>waiting</em></h2>
+    <p class="section-sub">Set up in under 2 minutes. Your first expiry alert might save you a headache you didn't know was coming.</p>
+    <a href="#" class="app-store-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on App Store — Free
+    </a>
+    <div class="app-store-meta">iOS 16+ · No account required · No ads</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="footer-logo">Docu<span>Timer</span></a>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Support</a>
+      <a href="mailto:hi@docutimer.com">hi@docutimer.com</a>
+    </div>
+    <div class="footer-copy">© 2025 DocuTimer · docutimer.com</div>
+  </div>
+</footer>
+
 </body>
 </html>
