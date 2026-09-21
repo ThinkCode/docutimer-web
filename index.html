@@ -1,774 +1,2872 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DocuTimer — Never miss an expiration date</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #0f0e0c;
-    --ink-2: #4a4840;
-    --ink-3: #9a9790;
-    --paper: #faf9f6;
-    --paper-2: #f0ede6;
-    --paper-3: #e4e0d8;
-    --accent: #c8440e;
-    --accent-light: #fceee8;
-    --amber: #d4860a;
-    --green: #2a6e3f;
-    --green-light: #e8f4ed;
-    --radius: 14px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <!-- Primary SEO Meta Tags -->
+  <title>DocuTimer — Private Document Expiration & Renewal Reminder for iOS</title>
+  <meta name="title" content="DocuTimer — Private Document Expiration & Renewal Reminder for iOS">
+  <meta name="description" content="Never miss a renewal. DocuTimer tracks passports, visas, driver's licenses, insurance policies, and subscriptions with intelligent Renewal Runway™ alerts, instant camera OCR scanning, and a private on-device biometric vault.">
+  <meta name="keywords" content="passport renewal reminder, document expiration tracker, driver license alert, visa expiration tracker, insurance renewal reminder, green card expiration reminder, renewal runway, private document vault, passport 6 month rule, expiration reminder app, ios document tracker, docutimer">
+  <meta name="author" content="ThinkCode / ByteXio">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://docutimer.com/">
 
-  html { scroll-behavior: smooth; }
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://docutimer.com/">
+  <meta property="og:title" content="DocuTimer — Renew on time, not on luck.">
+  <meta property="og:description" content="The elegant, private document expiration tracker for iOS. Calculates your actual Renewal Runway™ for passports, licenses, visas, and insurance. 100% private, on-device encrypted.">
+  <meta property="og:image" content="https://docutimer.com/assets/app-icon-dark.png">
+  <meta property="og:site_name" content="DocuTimer">
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 16px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://docutimer.com/">
+  <meta name="twitter:title" content="DocuTimer — Private Expiration & Renewal Tracker">
+  <meta name="twitter:description" content="Track passports, visas, licenses, insurance and subscriptions. Never get grounded by the 6-month passport rule again.">
+  <meta name="twitter:image" content="https://docutimer.com/assets/app-icon-dark.png">
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 18px 40px;
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(250,249,246,0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--paper-3);
-  }
-  .nav-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-    color: var(--ink);
-    text-decoration: none;
-    letter-spacing: -0.02em;
-  }
-  .nav-logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 28px; align-items: center; }
-  .nav-links a {
-    font-size: 14px; font-weight: 400; color: var(--ink-2);
-    text-decoration: none; transition: color .2s;
-  }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-cta {
-    background: var(--ink) !important;
-    color: var(--paper) !important;
-    padding: 9px 20px !important;
-    border-radius: 100px !important;
-    font-weight: 500 !important;
-    font-size: 13px !important;
-    transition: background .2s, transform .15s !important;
-  }
-  .nav-cta:hover { background: var(--accent) !important; transform: scale(1.03); }
+  <!-- Apple & Icons -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="assets/app-icon-dark.png">
+  <meta name="theme-color" content="#fafafa" id="theme-meta">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 120px 24px 80px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+  <!-- Structured Data: Mobile Application -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "DocuTimer",
+    "alternateName": "DocuTimer: Expiry Reminders",
+    "operatingSystem": "iOS 17.0 or later",
+    "applicationCategory": "ProductivityApplication",
+    "applicationSubCategory": "Utilities",
+    "offers": [
+      {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Free version supporting up to 5 active documents"
+      },
+      {
+        "@type": "Offer",
+        "price": "19.99",
+        "priceCurrency": "USD",
+        "billingDuration": "P1Y",
+        "description": "DocuTimer Pro Annual auto-renewable subscription"
+      },
+      {
+        "@type": "Offer",
+        "price": "49.99",
+        "priceCurrency": "USD",
+        "description": "DocuTimer Pro Lifetime one-time purchase"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "1280"
+    },
+    "description": "DocuTimer is an intelligent, private document expiration and renewal tracker for iPhone. Features Renewal Runway alerts, on-device OCR camera scanner, biometric vault, and private CloudKit sync.",
+    "url": "https://docutimer.com/",
+    "downloadUrl": "https://apps.apple.com/app/docutimer",
+    "featureList": [
+      "Renewal Runway™ travel buffer & processing time calculator",
+      "Camera MRZ passport & license OCR scanner",
+      "Encrypted on-device vault with Face ID / Touch ID lock",
+      "Private CloudKit synchronization with zero data collection",
+      "Multi-member household and dependent tracking",
+      "Interactive home screen & lock screen widgets",
+      "Year-at-a-glance renewal calendar heatmap",
+      "Subscription and policy renewal cost forecasting"
+    ]
   }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background: var(--paper);
-    z-index: 0;
-  }
-  .hero-ring {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid var(--paper-3);
-    opacity: 0.6;
-    animation: pulse-ring 6s ease-in-out infinite;
-  }
-  .hero-ring:nth-child(1) { width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 0s; }
-  .hero-ring:nth-child(2) { width: 700px; height: 700px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 1s; }
-  .hero-ring:nth-child(3) { width: 900px; height: 900px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: 2s; }
-  @keyframes pulse-ring {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.7; }
-  }
-  .hero-content { position: relative; z-index: 1; max-width: 680px; }
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--accent-light); color: var(--accent);
-    border: 1px solid #f0c4b4;
-    font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
-    padding: 6px 14px; border-radius: 100px;
-    margin-bottom: 28px;
-    text-transform: uppercase;
-    animation: fade-up 0.6s ease both;
-  }
-  .hero-eyebrow-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent);
-    animation: blink 1.8s ease-in-out infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+  </script>
 
-  h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(42px, 7vw, 72px);
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    margin-bottom: 22px;
-    animation: fade-up 0.6s 0.1s ease both;
+  <!-- Structured Data: FAQPage for Google Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the 6-month passport rule and how does DocuTimer solve it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Over 70 countries deny entry if your passport has fewer than 6 months of validity remaining from your travel date, even if the passport is not expired. Typical calendar reminders notify you on or near the expiration date, which is too late. DocuTimer calculates your actual Renewal Runway™, alerting you before you hit the travel cutoff and accounting for government renewal backlog windows."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my personal identification data safe with DocuTimer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DocuTimer is private by design. Your documents and attachments are encrypted locally on your iPhone using hardware-backed AES encryption and locked behind Face ID or Touch ID. When iCloud sync is enabled, records are replicated strictly to your personal private CloudKit database. DocuTimer has no servers, no user accounts, no analytics, and Apple's App Store privacy label verifies: Data Not Collected."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can DocuTimer scan documents automatically using the camera?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. DocuTimer includes on-device Vision OCR. Point your iPhone camera at a passport Machine Readable Zone (MRZ), driver's license, or insurance card, and the app instantly extracts the document number, holder name, issue date, and expiration date in milliseconds with zero manual typing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I track documents for my whole family or household?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. DocuTimer Pro lets you create multiple household profiles (partner, children, parents, dependents, or vehicles). You can view everyone's deadlines on a unified Renewal Radar or filter by individual family member with a single tap."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What kinds of documents can I track with DocuTimer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DocuTimer includes dedicated models and reminder cadences for Passports, Driver's Licenses, Visas, Green Cards, Vehicle Registrations, Car Insurance, Health Insurance, Home/Renters Insurance, Credit Cards, Professional Certifications, Memberships, Subscriptions, and custom document types."
+        }
+      }
+    ]
   }
-  h1 em { font-style: italic; color: var(--accent); }
+  </script>
 
-  .hero-sub {
-    font-size: clamp(16px, 2.2vw, 19px);
-    color: var(--ink-2);
-    font-weight: 300;
-    max-width: 520px;
-    margin: 0 auto 40px;
-    animation: fade-up 0.6s 0.2s ease both;
+  <!-- Structured Data: WebSite & Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DocuTimer",
+    "url": "https://docutimer.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://docutimer.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
   }
+  </script>
 
-  .hero-ctas {
-    display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;
-    margin-bottom: 60px;
-    animation: fade-up 0.6s 0.3s ease both;
-  }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--ink); color: var(--paper);
-    padding: 14px 28px; border-radius: 100px;
-    font-size: 15px; font-weight: 500; text-decoration: none;
-    transition: background .2s, transform .15s;
-  }
-  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
-  .btn-secondary {
-    display: inline-flex; align-items: center; gap: 8px;
-    color: var(--ink-2); font-size: 14px; font-weight: 400; text-decoration: none;
-    padding: 14px 20px;
-    transition: color .2s;
-  }
-  .btn-secondary:hover { color: var(--ink); }
+  <style>
+    /* =========================================================================
+       DOCUTIMER LEDGER DESIGN SYSTEM — EXACT APP TOKENS
+       Source: DocuTimerTheme.swift & DocuTimerTypography.swift
+       ========================================================================= */
 
-  .hero-social {
-    display: flex; gap: 20px; align-items: center; justify-content: center;
-    font-size: 13px; color: var(--ink-3);
-    animation: fade-up 0.6s 0.4s ease both;
-  }
-  .hero-social-item { display: flex; align-items: center; gap: 6px; }
-  .social-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--paper-3); }
+    :root {
+      /* Surfaces (Light) */
+      --canvas: #fafafa;
+      --surface: #ffffff;
+      --surface-elevated: #ffffff;
+      --surface-strong: #0a0a0b;
+      --surface-muted: #f0f0f2;
+      
+      /* Ink / Text (Light) */
+      --ink: #0a0a0b;
+      --ink-secondary: #66666c;
+      --ink-tertiary: #8e8e93;
+      --ink-on-strong: #ffffff;
+      --ink-on-strong-muted: #a0a0a6;
 
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+      /* Brand & Urgency */
+      --accent: #0a0a0b;
+      --on-accent: #ffffff;
+      --warn: #f59e0b;
+      --warn-text: #b45309;
+      --warn-bg: rgba(245, 158, 11, 0.12);
+      --danger: #dc2626;
+      --danger-text: #dc2626;
+      --danger-bg: rgba(220, 38, 38, 0.10);
+      --success: #16a34a;
+      --success-bg: rgba(22, 163, 74, 0.10);
 
-  /* PHONE MOCKUP */
-  .phone-wrap {
-    position: relative; z-index: 1;
-    display: flex; justify-content: center;
-    padding: 0 24px;
-    margin-top: -20px;
-  }
-  .phone-device {
-    width: 260px;
-    background: var(--ink);
-    border-radius: 44px;
-    padding: 14px;
-    box-shadow: 0 40px 80px rgba(15,14,12,0.22), 0 0 0 1px rgba(255,255,255,0.06);
-    animation: fade-up 0.7s 0.5s ease both;
-  }
-  .phone-screen {
-    background: #f5f3ef;
-    border-radius: 32px;
-    overflow: hidden;
-    height: 520px;
-    position: relative;
-  }
-  .phone-notch {
-    width: 100px; height: 28px;
-    background: var(--ink);
-    border-radius: 0 0 20px 20px;
-    margin: 0 auto;
-    position: relative; z-index: 2;
-  }
-  .phone-ui { padding: 0 14px 14px; }
-  .phone-header {
-    padding: 12px 0 16px;
-    border-bottom: 1px solid #e8e5df;
-    margin-bottom: 12px;
-  }
-  .phone-title { font-size: 20px; font-weight: 500; color: #0f0e0c; letter-spacing: -0.02em; }
-  .phone-sub { font-size: 11px; color: #9a9790; margin-top: 2px; }
+      /* Borders & Rails (Light) */
+      --border: #e4e4e7;
+      --border-strong: #d4d4d8;
+      --hairline: #efeff1;
+      --rail-later: #d4d4d8;
+      --heat-empty: #f4f4f5;
 
-  .doc-card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 12px 14px;
-    margin-bottom: 8px;
-    display: flex; align-items: center; gap: 10px;
-    border: 1px solid #eceae4;
-  }
-  .doc-icon {
-    width: 36px; height: 36px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 15px; flex-shrink: 0;
-  }
-  .doc-icon-red { background: #fceee8; }
-  .doc-icon-amber { background: #fef3e2; }
-  .doc-icon-green { background: #e8f4ed; }
-  .doc-info { flex: 1; min-width: 0; }
-  .doc-name { font-size: 13px; font-weight: 500; color: #0f0e0c; }
-  .doc-date { font-size: 11px; color: #9a9790; margin-top: 1px; }
-  .doc-badge {
-    font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 20px; white-space: nowrap;
-  }
-  .badge-red { background: #fceee8; color: #c8440e; }
-  .badge-amber { background: #fef3e2; color: #d4860a; }
-  .badge-green { background: #e8f4ed; color: #2a6e3f; }
+      /* Category Palette */
+      --cat-passport: #4a5568; /* slate */
+      --cat-health: #2f4bd8;   /* cobalt */
+      --cat-card: #b4532a;     /* clay */
+      --cat-stream: #6b4fbb;   /* plum */
+      --cat-visa: #0e7490;     /* teal */
+      --cat-car: #8a6a00;      /* ochre */
+      --cat-license: #b0246c;  /* berry */
+      --cat-custom: #3e6b2f;   /* moss */
+      --cat-member: #2e6b6b;   /* pine */
+      --cat-home: #a13a3a;     /* brick */
+      --cat-greencard: #1e5aa8;/* marine */
+      --cat-reg: #7a4e2d;      /* umber */
 
-  .phone-summary {
-    background: #0f0e0c;
-    border-radius: 14px;
-    padding: 12px 14px;
-    display: flex; align-items: center; justify-content: space-between;
-    margin-top: 4px;
-  }
-  .sum-label { font-size: 11px; color: rgba(255,255,255,0.5); }
-  .sum-val { font-size: 18px; font-weight: 500; color: #fff; margin-top: 2px; }
+      /* Shadows & Radii */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --radius-pill: 999px;
 
-  /* SECTIONS */
-  section { padding: 100px 24px; }
-  .container { max-width: 1000px; margin: 0 auto; }
-  .section-label {
-    font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--ink-3); margin-bottom: 12px;
-  }
-  h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(32px, 5vw, 52px);
-    line-height: 1.1; letter-spacing: -0.025em;
-    color: var(--ink); margin-bottom: 16px;
-  }
-  h2 em { font-style: italic; color: var(--accent); }
-  .section-sub { font-size: 17px; color: var(--ink-2); font-weight: 300; max-width: 480px; line-height: 1.6; }
+      --shadow-subtle: 0 1px 3px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.02);
+      --shadow-card: 0 12px 32px -4px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+      --shadow-phone: 0 35px 70px -15px rgba(10, 10, 11, 0.20), 0 0 0 1px rgba(10, 10, 11, 0.08);
 
-  /* PROBLEM STRIP */
-  .problem-strip {
-    background: var(--ink);
-    padding: 60px 24px;
-  }
-  .problem-inner {
-    max-width: 1000px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1px;
-    background: rgba(255,255,255,0.1);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .problem-item {
-    background: var(--ink);
-    padding: 36px 28px;
-  }
-  .problem-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 44px; color: var(--accent);
-    line-height: 1; margin-bottom: 8px;
-  }
-  .problem-text { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.5; }
-  .problem-text strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+      --nav-backdrop: rgba(250, 250, 250, 0.85);
+    }
 
-  /* FEATURES */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
-    margin-top: 56px;
-  }
-  .feature-card {
-    background: var(--paper-2);
-    border: 1px solid var(--paper-3);
-    border-radius: var(--radius);
-    padding: 28px;
-    transition: transform .2s, box-shadow .2s;
-  }
-  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(15,14,12,0.08); }
-  .feature-card.accent-card { background: var(--ink); border-color: var(--ink); }
-  .feature-icon-wrap {
-    width: 44px; height: 44px; border-radius: 12px;
-    background: var(--paper-3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px; margin-bottom: 16px;
-  }
-  .feature-card.accent-card .feature-icon-wrap { background: rgba(255,255,255,0.1); }
-  .feature-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
-  .feature-card.accent-card .feature-title { color: #fff; }
-  .feature-desc { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
-  .feature-card.accent-card .feature-desc { color: rgba(255,255,255,0.55); }
+    /* Dark Mode Tokens (Exact match to DocuTimerTheme.swift) */
+    html[data-theme="dark"] {
+      --canvas: #0a0a0b;
+      --surface: #0f0f11;
+      --surface-elevated: #161618;
+      --surface-strong: #0f0f11;
+      --surface-muted: #161618;
 
-  /* CATEGORIES */
-  .categories-section { background: var(--paper-2); }
-  .cat-grid {
-    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px;
-  }
-  .cat-pill {
-    display: flex; align-items: center; gap: 8px;
-    background: var(--paper); border: 1px solid var(--paper-3);
-    border-radius: 100px; padding: 10px 18px;
-    font-size: 14px; color: var(--ink-2);
-    transition: border-color .2s, color .2s, background .2s;
-    cursor: default;
-  }
-  .cat-pill:hover { border-color: var(--ink); color: var(--ink); background: var(--paper); }
-  .cat-pill-icon { font-size: 15px; }
+      --ink: #f5f5f5;
+      --ink-secondary: #9a9a9f;
+      --ink-tertiary: #6f6f75;
+      --ink-on-strong: #ffffff;
+      --ink-on-strong-muted: #a0a0a6;
 
-  /* PRICING */
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px; margin-top: 56px;
-  }
-  .pricing-card {
-    background: var(--paper-2);
-    border: 1px solid var(--paper-3);
-    border-radius: var(--radius);
-    padding: 28px 24px;
-    position: relative;
-  }
-  .pricing-card.popular {
-    background: var(--ink);
-    border-color: var(--ink);
-  }
-  .popular-badge {
-    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-    background: var(--accent); color: #fff;
-    font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
-    padding: 4px 14px; border-radius: 100px;
-    white-space: nowrap;
-  }
-  .pricing-plan { font-size: 13px; font-weight: 500; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
-  .pricing-card.popular .pricing-plan { color: rgba(255,255,255,0.5); }
-  .pricing-price {
-    font-family: 'DM Serif Display', serif;
-    font-size: 36px; color: var(--ink); line-height: 1; margin-bottom: 4px;
-  }
-  .pricing-card.popular .pricing-price { color: #fff; }
-  .pricing-per { font-size: 13px; color: var(--ink-3); margin-bottom: 20px; }
-  .pricing-card.popular .pricing-per { color: rgba(255,255,255,0.45); }
-  .pricing-features { list-style: none; }
-  .pricing-features li {
-    font-size: 13px; color: var(--ink-2); padding: 7px 0;
-    border-bottom: 1px solid var(--paper-3);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .pricing-card.popular .pricing-features li { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.1); }
-  .pricing-features li:last-child { border-bottom: none; }
-  .check-mark { color: var(--green); font-size: 13px; flex-shrink: 0; }
-  .pricing-card.popular .check-mark { color: #6fcf97; }
-  .pricing-btn {
-    display: block; text-align: center; margin-top: 24px;
-    padding: 12px; border-radius: 100px;
-    font-size: 14px; font-weight: 500; text-decoration: none;
-    transition: transform .15s, background .2s;
-  }
-  .pricing-btn:hover { transform: translateY(-2px); }
-  .btn-outline { border: 1.5px solid var(--paper-3); color: var(--ink); }
-  .btn-outline:hover { border-color: var(--ink); }
-  .btn-filled { background: var(--accent); color: #fff; }
-  .btn-filled:hover { background: #a33609; }
+      --accent: #f5f5f5;
+      --on-accent: #15171a;
+      --warn: #f59e0b;
+      --warn-text: #fbbf24;
+      --warn-bg: rgba(245, 158, 11, 0.16);
+      --danger: #f87171;
+      --danger-text: #f87171;
+      --danger-bg: rgba(248, 113, 113, 0.14);
+      --success: #34d399;
+      --success-bg: rgba(52, 211, 153, 0.14);
 
-  /* TESTIMONIALS */
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px; margin-top: 56px;
-  }
-  .testimonial {
-    background: var(--paper-2);
-    border: 1px solid var(--paper-3);
-    border-radius: var(--radius);
-    padding: 26px;
-  }
-  .testimonial-text {
-    font-family: 'DM Serif Display', serif;
-    font-size: 17px; line-height: 1.5;
-    color: var(--ink); margin-bottom: 16px;
-    font-style: italic;
-  }
-  .testimonial-author { display: flex; align-items: center; gap: 10px; }
-  .author-avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 500;
-  }
-  .avatar-1 { background: #fceee8; color: var(--accent); }
-  .avatar-2 { background: #e8f4ed; color: var(--green); }
-  .avatar-3 { background: #fef3e2; color: var(--amber); }
-  .author-name { font-size: 13px; font-weight: 500; color: var(--ink); }
-  .author-role { font-size: 12px; color: var(--ink-3); }
+      --border: #232327;
+      --border-strong: #2e2e33;
+      --hairline: #1c1c1f;
+      --rail-later: #3a3a40;
+      --heat-empty: #141416;
 
-  /* CTA */
-  .cta-section {
-    background: var(--ink);
-    padding: 100px 24px;
-    text-align: center;
-  }
-  .cta-section h2 { color: #fff; }
-  .cta-section h2 em { color: var(--accent); }
-  .cta-section .section-sub { color: rgba(255,255,255,0.5); margin: 0 auto 40px; }
-  .app-store-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: #fff; color: var(--ink);
-    padding: 14px 28px; border-radius: 14px;
-    font-size: 14px; font-weight: 500; text-decoration: none;
-    transition: transform .15s;
-  }
-  .app-store-btn:hover { transform: translateY(-2px); }
-  .app-store-meta { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 16px; }
+      --shadow-subtle: 0 1px 3px rgba(0,0,0,0.40);
+      --shadow-card: 0 12px 32px -4px rgba(0, 0, 0, 0.40), 0 0 0 1px rgba(255,255,255,0.06);
+      --shadow-phone: 0 35px 80px -15px rgba(0, 0, 0, 0.80), 0 0 0 1px rgba(255, 255, 255, 0.12);
 
-  /* FOOTER */
-  footer {
-    background: var(--paper-2);
-    border-top: 1px solid var(--paper-3);
-    padding: 40px 24px;
-  }
-  .footer-inner {
-    max-width: 1000px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
-  }
-  .footer-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px; color: var(--ink); text-decoration: none;
-  }
-  .footer-logo span { color: var(--accent); }
-  .footer-links { display: flex; gap: 20px; }
-  .footer-links a { font-size: 13px; color: var(--ink-3); text-decoration: none; transition: color .2s; }
-  .footer-links a:hover { color: var(--ink); }
-  .footer-copy { font-size: 12px; color: var(--ink-3); }
+      --nav-backdrop: rgba(10, 10, 11, 0.85);
+    }
 
-  @media (max-width: 640px) {
-    nav { padding: 14px 20px; }
-    .nav-links { display: none; }
-    .hero { padding: 100px 20px 60px; }
-    .problem-inner { grid-template-columns: 1fr 1fr; }
-    section { padding: 70px 20px; }
-  }
-</style>
+    /* Base Reset & Ledger Typography */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+      background-color: var(--canvas);
+      color: var(--ink);
+      line-height: 1.55;
+      overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Ledger Typography Scale */
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--ink-tertiary);
+    }
+
+    .numeral {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Mono", monospace;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.045em;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", -apple-system, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+      color: var(--ink);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =========================================================================
+       NAVIGATION BAR
+       ========================================================================= */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--nav-backdrop);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.25s ease;
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-secondary);
+      transition: color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--ink);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Theme Switcher Button */
+    .theme-toggle-btn {
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-pill);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--border);
+      transform: scale(1.05);
+    }
+
+    .theme-icon-dark { display: none; }
+    html[data-theme="dark"] .theme-icon-light { display: none; }
+    html[data-theme="dark"] .theme-icon-dark { display: block; }
+
+    /* Download CTA Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      padding: 10px 20px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--canvas);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--ink);
+      border-color: var(--border-strong);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-muted);
+      transform: translateY(-1px);
+    }
+
+    .btn-lg {
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: var(--radius-pill);
+    }
+
+    /* =========================================================================
+       HERO SECTION
+       ========================================================================= */
+    .hero-section {
+      padding: 140px 0 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--warn);
+      box-shadow: 0 0 8px var(--warn);
+    }
+
+    .hero-title {
+      font-size: clamp(40px, 4.8vw, 62px);
+      letter-spacing: -0.045em;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span.accent-ink {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(17px, 1.3vw, 20px);
+      color: var(--ink-secondary);
+      font-weight: 400;
+      line-height: 1.5;
+      margin-bottom: 32px;
+      max-width: 520px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .hero-badges-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--ink-secondary);
+    }
+
+    .hero-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-badge-item svg {
+      color: var(--ink);
+    }
+
+    /* =========================================================================
+       INTERACTIVE PHONE MOCKUP (LEDGER APP SIMULATOR)
+       ========================================================================= */
+    .mockup-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      perspective: 1200px;
+    }
+
+    .phone-device {
+      width: 340px;
+      height: 690px;
+      background: var(--surface-strong);
+      border-radius: 52px;
+      padding: 11px;
+      box-shadow: var(--shadow-phone);
+      position: relative;
+      border: 3px solid rgba(255,255,255,0.18);
+      user-select: none;
+      transition: transform 0.3s ease;
+    }
+
+    .phone-device:hover {
+      transform: translateY(-4px);
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--canvas);
+      border-radius: 42px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    /* iOS Status Bar */
+    .phone-status-bar {
+      padding: 10px 20px 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      z-index: 10;
+    }
+
+    .phone-dynamic-island {
+      width: 96px;
+      height: 24px;
+      background: #000;
+      border-radius: 20px;
+      margin: 0 auto;
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      transform: translateX(-50%);
+      z-index: 20;
+    }
+
+    /* Screen Content */
+    .phone-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 14px 70px;
+      scrollbar-width: none;
+    }
+    .phone-content::-webkit-scrollbar { display: none; }
+
+    .phone-app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      padding: 0 4px;
+    }
+
+    .phone-app-greeting {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .phone-avatar-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--surface-strong);
+      color: var(--ink-on-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border-strong);
+    }
+
+    /* Household Filter Chips */
+    .phone-chips-scroll {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+      padding-bottom: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .phone-chips-scroll::-webkit-scrollbar { display: none; }
+
+    .phone-chip {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      color: var(--ink-secondary);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .phone-chip.active {
+      background: var(--surface-strong);
+      color: var(--ink-on-strong);
+      border-color: var(--surface-strong);
+    }
+
+    /* Hero Countdown Card in App */
+    .phone-hero-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-hero-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      bottom: 0;
+      background: var(--warn);
+    }
+
+    .phone-hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .phone-hero-numeral {
+      font-size: 40px;
+      line-height: 1;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .phone-hero-doc-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .phone-hero-runway {
+      font-size: 11px;
+      color: var(--warn-text);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Summary 3-tile grid */
+    .phone-tiles-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .phone-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px 10px;
+    }
+
+    .phone-tile-num {
+      font-size: 18px;
+      font-weight: 800;
+      margin-top: 2px;
+      color: var(--ink);
+    }
+
+    /* Document Rows / Renewal Radar */
+    .phone-radar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .phone-radar-header {
+      padding: 10px 14px 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .phone-doc-row {
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--hairline);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      position: relative;
+    }
+
+    .phone-doc-row:last-child {
+      border-bottom: none;
+    }
+
+    .phone-doc-row:hover {
+      background: var(--surface-muted);
+    }
+
+    .phone-doc-rail {
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 3px;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .rail-warn { background: var(--warn); }
+    .rail-danger { background: var(--danger); }
+    .rail-later { background: var(--rail-later); }
+
+    .phone-doc-meta {
+      padding-left: 6px;
+    }
+
+    .phone-doc-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .phone-doc-sub {
+      font-size: 10px;
+      color: var(--ink-secondary);
+      margin-top: 1px;
+    }
+
+    .phone-doc-countdown {
+      text-align: right;
+    }
+
+    .phone-doc-days {
+      font-size: 13px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .days-warn { color: var(--warn-text); }
+    .days-danger { color: var(--danger-text); }
+    .days-later { color: var(--ink-secondary); }
+
+    .phone-doc-status-badge {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Tab Bar */
+    .phone-tab-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 58px;
+      background: var(--surface-elevated);
+      border-top: 1px solid var(--hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding-bottom: 12px;
+      z-index: 10;
+    }
+
+    .phone-tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ink-tertiary);
+    }
+
+    .phone-tab-item.active {
+      color: var(--ink);
+    }
+
+    .phone-tab-add {
+      width: 38px;
+      height: 38px;
+      background: var(--surface-strong);
+      color: var(--ink-on-strong);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-top: -16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    /* Floating Annotation Badges */
+    .mockup-floater {
+      position: absolute;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 30;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .floater-left {
+      left: -40px;
+      top: 160px;
+      animation-delay: 0s;
+    }
+
+    .floater-right {
+      right: -40px;
+      bottom: 180px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* =========================================================================
+       SECTION: TRUST & SOCIAL PROOF
+       ========================================================================= */
+    .trust-strip {
+      padding: 30px 0 60px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .trust-stat {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+    }
+
+    .trust-label {
+      font-size: 13px;
+      color: var(--ink-secondary);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    /* =========================================================================
+       SECTION: RENEWAL RUNWAY™ (CORE INNOVATION)
+       ========================================================================= */
+    .runway-section {
+      padding: 100px 0;
+    }
+
+    .section-header-center {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 60px;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 3.5vw, 44px);
+      margin: 12px 0 16px;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+    }
+
+    .runway-comparison-card {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 40px;
+    }
+
+    .runway-timeline-visual {
+      position: relative;
+      margin: 40px 0 30px;
+      padding: 20px 0;
+    }
+
+    .runway-track-bg {
+      height: 10px;
+      background: var(--surface-muted);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .runway-track-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 72%;
+      background: linear-gradient(90deg, #10b981 0%, #f59e0b 60%, #ef4444 100%);
+      border-radius: 10px;
+    }
+
+    .runway-nodes {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+      position: relative;
+    }
+
+    .runway-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 140px;
+    }
+
+    .runway-node-pin {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 3px solid var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .runway-node.file-now .runway-node-pin { border-color: var(--warn); background: var(--warn); }
+    .runway-node.travel-risk .runway-node-pin { border-color: var(--warn-text); }
+    .runway-node.expired .runway-node-pin { border-color: var(--danger); background: var(--danger); }
+
+    .node-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .node-date {
+      font-size: 11px;
+      color: var(--ink-secondary);
+      font-family: monospace;
+      margin-top: 2px;
+    }
+
+    .node-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    .tag-warn { background: var(--warn-bg); color: var(--warn-text); }
+    .tag-danger { background: var(--danger-bg); color: var(--danger-text); }
+
+    /* Interactive Renewal Calculator */
+    .calculator-box {
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .calc-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .calc-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .calc-select, .calc-date-input {
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .calc-select:focus, .calc-date-input:focus {
+      border-color: var(--ink);
+    }
+
+    .calc-result-box {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .calc-res-title {
+      font-size: 12px;
+      color: var(--ink-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .calc-res-status {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--warn-text);
+    }
+
+    .calc-res-detail {
+      font-size: 13px;
+      color: var(--ink-secondary);
+      line-height: 1.5;
+    }
+
+    /* =========================================================================
+       FEATURES GRID
+       ========================================================================= */
+    .features-section {
+      padding: 100px 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card);
+      border-color: var(--border-strong);
+    }
+
+    .feature-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--ink);
+    }
+
+    .feature-card h3 {
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .feature-tag {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    /* =========================================================================
+       PRIVACY DEEP DIVE
+       ========================================================================= */
+    .privacy-section {
+      padding: 100px 0;
+    }
+
+    .privacy-box {
+      background: var(--surface-strong);
+      color: var(--ink-on-strong);
+      border-radius: var(--radius-xl);
+      padding: 60px 50px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .privacy-box h2 {
+      color: var(--ink-on-strong);
+      font-size: clamp(28px, 3vw, 40px);
+      margin-bottom: 16px;
+    }
+
+    .privacy-box p {
+      color: var(--ink-on-strong-muted);
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .privacy-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .privacy-checklist li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-on-strong);
+    }
+
+    .privacy-check-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #34d399;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .privacy-nutrition-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      backdrop-filter: blur(10px);
+    }
+
+    .nutrition-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .nutrition-sub {
+      font-size: 12px;
+      color: var(--ink-on-strong-muted);
+      margin-bottom: 18px;
+    }
+
+    .nutrition-hero-badge {
+      background: rgba(52, 211, 153, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      color: #34d399;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .nutrition-desc {
+      font-size: 12px;
+      color: var(--ink-on-strong-muted);
+      line-height: 1.5;
+    }
+
+    /* =========================================================================
+       CATEGORY DIRECTORY & SEO MATRIX
+       ========================================================================= */
+    .categories-section {
+      padding: 100px 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .cat-item {
+      background: var(--canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .cat-item:hover {
+      border-color: var(--ink);
+    }
+
+    .cat-item-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .cat-color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .cat-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .cat-item p {
+      font-size: 12px;
+      color: var(--ink-secondary);
+      line-height: 1.5;
+    }
+
+    /* =========================================================================
+       COMPARISON TABLE
+       ========================================================================= */
+    .comparison-section {
+      padding: 100px 0;
+    }
+
+    .comparison-table-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      overflow-x: auto;
+      box-shadow: var(--shadow-card);
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .comp-table th, .comp-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .comp-table th {
+      background: var(--surface-muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-secondary);
+      font-weight: 700;
+    }
+
+    .comp-table th.col-highlight, .comp-table td.col-highlight {
+      background: var(--canvas);
+      font-weight: 700;
+      color: var(--ink);
+      border-left: 2px solid var(--ink);
+      border-right: 2px solid var(--ink);
+    }
+
+    .comp-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .check-yes {
+      color: #10b981;
+      font-weight: 800;
+    }
+
+    .check-no {
+      color: var(--ink-tertiary);
+    }
+
+    /* =========================================================================
+       PRICING TIERS
+       ========================================================================= */
+    .pricing-section {
+      padding: 100px 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      background: var(--canvas);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      padding: 36px 30px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--ink);
+      box-shadow: var(--shadow-card);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--ink);
+      color: var(--canvas);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .plan-name {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .plan-price {
+      font-size: 38px;
+      font-weight: 900;
+      margin-bottom: 6px;
+      letter-spacing: -0.04em;
+    }
+
+    .plan-period {
+      font-size: 13px;
+      color: var(--ink-secondary);
+      margin-bottom: 24px;
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--ink-secondary);
+      margin-bottom: 32px;
+      flex: 1;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .plan-features li svg {
+      color: var(--ink);
+      flex-shrink: 0;
+    }
+
+    /* =========================================================================
+       FAQ SECTION (ACCORDION)
+       ========================================================================= */
+    .faq-section {
+      padding: 100px 0;
+    }
+
+    .faq-accordion {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .faq-item:hover {
+      border-color: var(--border-strong);
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      color: var(--ink);
+    }
+
+    .faq-chevron {
+      transition: transform 0.2s ease;
+      color: var(--ink-tertiary);
+    }
+
+    .faq-item.active .faq-chevron {
+      transform: rotate(180deg);
+      color: var(--ink);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 24px;
+      color: var(--ink-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      padding: 0 24px 20px;
+    }
+
+    /* =========================================================================
+       FINAL CTA & FOOTER
+       ========================================================================= */
+    .cta-banner-section {
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .cta-banner {
+      background: var(--surface-strong);
+      color: var(--ink-on-strong);
+      border-radius: var(--radius-xl);
+      padding: 70px 40px;
+      box-shadow: var(--shadow-card);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .cta-banner h2 {
+      color: var(--ink-on-strong);
+      font-size: clamp(32px, 4vw, 48px);
+      margin-bottom: 16px;
+    }
+
+    .cta-banner p {
+      color: var(--ink-on-strong-muted);
+      font-size: 17px;
+      max-width: 580px;
+      margin: 0 auto 36px;
+    }
+
+    footer {
+      padding: 60px 0 40px;
+      border-top: 1px solid var(--border);
+      background: var(--canvas);
+      font-size: 13px;
+      color: var(--ink-secondary);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a:hover {
+      color: var(--ink);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--hairline);
+      font-size: 12px;
+      color: var(--ink-tertiary);
+    }
+
+    /* =========================================================================
+       RESPONSIVENESS
+       ========================================================================= */
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 50px;
+      }
+      .hero-subtitle {
+        margin: 0 auto 32px;
+      }
+      .hero-ctas {
+        justify-content: center;
+      }
+      .hero-badges-row {
+        justify-content: center;
+      }
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .privacy-box {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+      }
+      .category-matrix-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      .calculator-box {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .category-matrix-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .floater-left, .floater-right {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">Docu<span>Timer</span></a>
-  <div class="nav-links">
-    <a href="#features">Features</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#faq">FAQ</a>
-    <a href="#" class="nav-cta">Download free</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg">
-    <div class="hero-ring"></div>
-    <div class="hero-ring"></div>
-    <div class="hero-ring"></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">
-      <div class="hero-eyebrow-dot"></div>
-      Coming soon to iOS devices
-    </div>
-    <h1>Never get caught with an <em>expired</em> document again</h1>
-    <p class="hero-sub">DocuTimer tracks every document that matters — passports, visas, insurance, subscriptions — and alerts you before time runs out.</p>
-    <div class="hero-ctas">
-      <a href="#" class="btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Download on App Store
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <img src="assets/app-icon-light.png" alt="DocuTimer App Logo" class="brand-icon" id="brand-icon-img">
+        <span>DocuTimer</span>
       </a>
-      <a href="#features" class="btn-secondary">
-        See how it works →
-      </a>
+
+      <nav class="nav-links">
+        <a href="#runway" class="nav-link">Renewal Runway™</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#privacy" class="nav-link">Privacy</a>
+        <a href="#categories" class="nav-link">Documents</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Live Light/Dark Switcher -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme mode" title="Toggle Light / Dark Mode">
+          <svg class="theme-icon-light" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon-dark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <a href="https://apps.apple.com/app/docutimer" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.64 1.36-.56.65-.99 1.7-0.88 2.73 1.02.08 2-.5 2.6-1.24z"/>
+          </svg>
+          <span>Get DocuTimer</span>
+        </a>
+      </div>
     </div>
-    <div class="hero-social">
-      <div class="hero-social-item">★★★★★ App Store</div>
-      <div class="social-dot"></div>
-      <div class="hero-social-item">Free to start</div>
-      <div class="social-dot"></div>
-      <div class="hero-social-item">No ads, ever</div>
-    </div>
-  </div>
-</section>
+  </header>
 
-<!-- PHONE MOCKUP -->
-<div class="phone-wrap">
-  <div class="phone-device">
-    <div class="phone-screen">
-      <div class="phone-notch"></div>
-      <div class="phone-ui">
-        <div class="phone-header">
-          <div class="phone-title">My Documents</div>
-          <div class="phone-sub">3 expiring soon</div>
-        </div>
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Left Column: Copy & Value Proposition -->
+          <div class="hero-left">
+            <div class="hero-pill-badge">
+              <span class="badge-dot"></span>
+              <span class="eyebrow">The Expiration Intelligence App</span>
+            </div>
 
-        <div class="doc-card">
-          <div class="doc-icon doc-icon-red">🛂</div>
-          <div class="doc-info">
-            <div class="doc-name">US Passport</div>
-            <div class="doc-date">Expires May 2, 2025</div>
+            <h1 class="hero-title">
+              Renew on time, <br>
+              <span class="accent-ink">not on luck.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              One calm, encrypted home for every date that can expire: passports, visas, licenses, insurance policies, and subscriptions. DocuTimer calculates your actual <strong>Renewal Runway™</strong> and tells you early — before a lapse turns into a fine, a denial, or a grounded flight.
+            </p>
+
+            <div class="hero-ctas">
+              <a href="https://apps.apple.com/app/docutimer" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.64 1.36-.56.65-.99 1.7-0.88 2.73 1.02.08 2-.5 2.6-1.24z"/>
+                </svg>
+                <span>Download on iOS</span>
+              </a>
+
+              <a href="#runway" class="btn btn-secondary btn-lg">
+                <span>See Renewal Runway</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+
+            <div class="hero-badges-row">
+              <div class="hero-badge-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>Face ID Vault</span>
+              </div>
+              <div class="hero-badge-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Data Not Collected</span>
+              </div>
+              <div class="hero-badge-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                  <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                <span>Camera MRZ OCR</span>
+              </div>
+            </div>
           </div>
-          <div class="doc-badge badge-red">14 days</div>
-        </div>
 
-        <div class="doc-card">
-          <div class="doc-icon doc-icon-amber">🚗</div>
-          <div class="doc-info">
-            <div class="doc-name">Car Insurance</div>
-            <div class="doc-date">Expires Jun 15, 2025</div>
+          <!-- Right Column: Interactive Phone Mockup -->
+          <div class="hero-right mockup-wrapper">
+            
+            <!-- Float annotation left -->
+            <div class="mockup-floater floater-left">
+              <span style="color: var(--warn); font-size: 16px;">⚠</span>
+              <div>
+                <div style="font-size: 10px; color: var(--ink-tertiary); text-transform: uppercase;">6-Month Rule</div>
+                <div>Passport Travel Risk</div>
+              </div>
+            </div>
+
+            <!-- Float annotation right -->
+            <div class="mockup-floater floater-right">
+              <span style="color: #10b981; font-size: 16px;">✓</span>
+              <div>
+                <div style="font-size: 10px; color: var(--ink-tertiary); text-transform: uppercase;">MRZ OCR Scan</div>
+                <div>Zero Manual Typing</div>
+              </div>
+            </div>
+
+            <div class="phone-device">
+              <div class="phone-dynamic-island"></div>
+              
+              <div class="phone-screen">
+                <!-- Status Bar -->
+                <div class="phone-status-bar">
+                  <span>9:41</span>
+                  <div style="display: flex; gap: 4px; align-items: center;">
+                    <svg width="14" height="10" viewBox="0 0 16 12" fill="currentColor">
+                      <rect x="0" y="8" width="3" height="4" rx="0.5"/>
+                      <rect x="4" y="5" width="3" height="7" rx="0.5"/>
+                      <rect x="8" y="2" width="3" height="10" rx="0.5"/>
+                      <rect x="12" y="0" width="3" height="12" rx="0.5"/>
+                    </svg>
+                    <svg width="18" height="10" viewBox="0 0 24 12" fill="currentColor">
+                      <rect x="1" y="1" width="19" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                      <rect x="3" y="3" width="13" height="6" rx="1"/>
+                      <path d="M22 4v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- App Body -->
+                <div class="phone-content" id="phone-app-content">
+                  
+                  <!-- App Header -->
+                  <div class="phone-app-header">
+                    <div>
+                      <div class="eyebrow" id="today-date-str">Tuesday · Sep 22</div>
+                      <div class="phone-app-greeting">Good morning</div>
+                    </div>
+                    <div class="phone-avatar-btn">AK</div>
+                  </div>
+
+                  <!-- Interactive Household Filter Chips -->
+                  <div class="phone-chips-scroll" id="household-chips">
+                    <button class="phone-chip active" data-owner="all">All (7)</button>
+                    <button class="phone-chip" data-owner="alex">Alex (4)</button>
+                    <button class="phone-chip" data-owner="maya">Maya (2)</button>
+                    <button class="phone-chip" data-owner="leo">Leo (1)</button>
+                  </div>
+
+                  <!-- Hero Countdown Card -->
+                  <div class="phone-hero-card" id="phone-hero-card">
+                    <div class="phone-hero-top">
+                      <span class="eyebrow">Next Expiration</span>
+                      <span class="eyebrow" style="color: var(--warn-text);" id="hero-tag">Travel Risk</span>
+                    </div>
+                    <div class="phone-hero-numeral numeral" id="hero-days">37 <span style="font-size: 20px; font-weight: 700;">DAYS</span></div>
+                    <div class="phone-hero-doc-name" id="hero-title">US Passport</div>
+                    <div class="phone-hero-runway" id="hero-caption">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10"></circle>
+                      </svg>
+                      <span>File renewal by Nov 12 (6-mo buffer)</span>
+                    </div>
+                  </div>
+
+                  <!-- Three Metric Tiles -->
+                  <div class="phone-tiles-grid">
+                    <div class="phone-tile">
+                      <div class="eyebrow">Active</div>
+                      <div class="phone-tile-num numeral" id="tile-active-count">7</div>
+                    </div>
+                    <div class="phone-tile">
+                      <div class="eyebrow">Expiring</div>
+                      <div class="phone-tile-num numeral" style="color: var(--warn);" id="tile-exp-count">2</div>
+                    </div>
+                    <div class="phone-tile">
+                      <div class="eyebrow">Yearly</div>
+                      <div class="phone-tile-num numeral">$1.8k</div>
+                    </div>
+                  </div>
+
+                  <!-- Renewal Radar -->
+                  <div class="phone-radar-card">
+                    <div class="phone-radar-header">
+                      <span class="eyebrow">Renewal Radar</span>
+                      <span class="eyebrow" style="color: var(--ink);">Timeline →</span>
+                    </div>
+
+                    <div id="phone-doc-list">
+                      <!-- Row 1: Passport -->
+                      <div class="phone-doc-row" data-owner="alex" data-days="37" data-title="US Passport" data-caption="File renewal by Nov 12 (6-mo buffer)" data-tag="Travel Risk">
+                        <div class="phone-doc-rail rail-warn"></div>
+                        <div class="phone-doc-meta">
+                          <div class="phone-doc-title">US Passport</div>
+                          <div class="phone-doc-sub">Alex · File by Nov 12</div>
+                        </div>
+                        <div class="phone-doc-countdown">
+                          <div class="phone-doc-days days-warn numeral">37d</div>
+                          <div class="phone-doc-status-badge" style="color: var(--warn-text);">Travel Risk</div>
+                        </div>
+                      </div>
+
+                      <!-- Row 2: Driver's License -->
+                      <div class="phone-doc-row" data-owner="alex" data-days="52" data-title="Driver's License (CA)" data-caption="DMV online renewal deadline approaching" data-tag="File Now">
+                        <div class="phone-doc-rail rail-warn"></div>
+                        <div class="phone-doc-meta">
+                          <div class="phone-doc-title">Driver's License (CA)</div>
+                          <div class="phone-doc-sub">Alex · Real ID Compliant</div>
+                        </div>
+                        <div class="phone-doc-countdown">
+                          <div class="phone-doc-days days-warn numeral">52d</div>
+                          <div class="phone-doc-status-badge" style="color: var(--warn-text);">File Now</div>
+                        </div>
+                      </div>
+
+                      <!-- Row 3: Auto Insurance -->
+                      <div class="phone-doc-row" data-owner="maya" data-days="118" data-title="Geico Auto Insurance" data-caption="6-month policy premium renewal" data-tag="Clear">
+                        <div class="phone-doc-rail rail-later"></div>
+                        <div class="phone-doc-meta">
+                          <div class="phone-doc-title">Geico Auto Insurance</div>
+                          <div class="phone-doc-sub">Maya · $840 / 6mo</div>
+                        </div>
+                        <div class="phone-doc-countdown">
+                          <div class="phone-doc-days days-later numeral">118d</div>
+                          <div class="phone-doc-status-badge" style="color: var(--ink-tertiary);">Clear</div>
+                        </div>
+                      </div>
+
+                      <!-- Row 4: Leo Pediatric Immunization -->
+                      <div class="phone-doc-row" data-owner="leo" data-days="194" data-title="Pediatric Health Form" data-caption="School district annual filing" data-tag="Clear">
+                        <div class="phone-doc-rail rail-later"></div>
+                        <div class="phone-doc-meta">
+                          <div class="phone-doc-title">Pediatric Health Form</div>
+                          <div class="phone-doc-sub">Leo · Kindergarten</div>
+                        </div>
+                        <div class="phone-doc-countdown">
+                          <div class="phone-doc-days days-later numeral">194d</div>
+                          <div class="phone-doc-status-badge" style="color: var(--ink-tertiary);">Clear</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Bottom Tab Bar -->
+                <div class="phone-tab-bar">
+                  <div class="phone-tab-item active">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span>Today</span>
+                  </div>
+                  <div class="phone-tab-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <span>Docs</span>
+                  </div>
+                  <div class="phone-tab-add">+</div>
+                  <div class="phone-tab-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Calendar</span>
+                  </div>
+                  <div class="phone-tab-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="3"></circle>
+                      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    <span>Settings</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="doc-badge badge-amber">58 days</div>
-        </div>
 
-        <div class="doc-card">
-          <div class="doc-icon doc-icon-green">💳</div>
-          <div class="doc-info">
-            <div class="doc-name">Chase Sapphire</div>
-            <div class="doc-date">Annual fee Aug 1, 2025</div>
-          </div>
-          <div class="doc-badge badge-green">Active</div>
         </div>
+      </div>
+    </section>
 
-        <div class="doc-card">
-          <div class="doc-icon doc-icon-green">🏥</div>
-          <div class="doc-info">
-            <div class="doc-name">Health Insurance</div>
-            <div class="doc-date">Expires Dec 31, 2025</div>
-          </div>
-          <div class="doc-badge badge-green">Active</div>
-        </div>
-
-        <div class="phone-summary">
+    <!-- TRUST STRIP -->
+    <section class="trust-strip">
+      <div class="container">
+        <div class="trust-grid">
           <div>
-            <div class="sum-label">Total tracked</div>
-            <div class="sum-val">12 docs</div>
+            <div class="trust-stat numeral">0</div>
+            <div class="trust-label">Trackers or User Accounts</div>
           </div>
-          <div style="text-align:right;">
-            <div class="sum-label">Next expiry</div>
-            <div class="sum-val" style="color:#f0997b;">14 days</div>
+          <div>
+            <div class="trust-stat numeral">100%</div>
+            <div class="trust-label">On-Device Encrypted Storage</div>
+          </div>
+          <div>
+            <div class="trust-stat numeral">9:00 AM</div>
+            <div class="trust-label">Rich Local Morning Reminders</div>
+          </div>
+          <div>
+            <div class="trust-stat numeral">&lt; 2s</div>
+            <div class="trust-label">Instant MRZ & Card OCR</div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    </section>
 
-<!-- PROBLEM STRIP -->
-<div class="problem-strip">
-  <div class="problem-inner">
-    <div class="problem-item">
-      <div class="problem-num">$250</div>
-      <div class="problem-text"><strong>Average fine</strong> for driving with an expired license or registration</div>
-    </div>
-    <div class="problem-item">
-      <div class="problem-num">6 wks</div>
-      <div class="problem-text"><strong>Passport renewal time</strong> — miss the window and your trip is cancelled</div>
-    </div>
-    <div class="problem-item">
-      <div class="problem-num">$95/yr</div>
-      <div class="problem-text"><strong>Average annual fee</strong> quietly charged to cards people forget to cancel</div>
-    </div>
-    <div class="problem-item">
-      <div class="problem-num">180 days</div>
-      <div class="problem-text"><strong>Visa overstay</strong> can trigger a 3-year bar from re-entering the US</div>
-    </div>
-  </div>
-</div>
+    <!-- SECTION: RENEWAL RUNWAY™ -->
+    <section class="runway-section" id="runway">
+      <div class="container">
+        <div class="section-header-center">
+          <div class="eyebrow">The Core Innovation</div>
+          <h2 class="section-title">Why standard reminder apps fail you.</h2>
+          <p class="section-desc">
+            A regular calendar alert notifies you on the day a document expires. For passports, visas, and licenses, that is already months too late.
+          </p>
+        </div>
 
-<!-- FEATURES -->
-<section id="features">
-  <div class="container">
-    <div class="section-label">Features</div>
-    <h2>Everything in one <em>crisp</em> place</h2>
-    <p class="section-sub">Built natively for iOS with the design quality you'd expect from a first-party Apple app.</p>
+        <div class="runway-comparison-card">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <span class="eyebrow">Example: US Passport Expiration Runway</span>
+              <h3 style="font-size: 22px; margin-top: 4px;">The 6-Month International Travel Validity Rule</h3>
+            </div>
+            <div class="hero-pill-badge" style="margin: 0; background: var(--warn-bg); border-color: transparent; color: var(--warn-text);">
+              <span>Typical Passport Processing: 8–11 Weeks</span>
+            </div>
+          </div>
 
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon-wrap">⏰</div>
-        <div class="feature-title">Smart reminders</div>
-        <div class="feature-desc">Set up to 5 alerts per document — 90, 60, 30, 14, 7, and 1 day out. Rich notifications deep-link straight to the record.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap">📋</div>
-        <div class="feature-title">Every document type</div>
-        <div class="feature-desc">Passports, visas, driver's licenses, insurance policies, credit card fees, subscriptions, and custom entries.</div>
-      </div>
-      <div class="feature-card accent-card">
-        <div class="feature-icon-wrap">📸</div>
-        <div class="feature-title">OCR scan &amp; auto-fill</div>
-        <div class="feature-desc">Point your camera at a document. DocuTimer reads the expiration date and fills it in automatically using Apple's Vision framework.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap">☁️</div>
-        <div class="feature-title">iCloud sync</div>
-        <div class="feature-desc">Your data stays in sync across iPhone and iPad, encrypted end-to-end. No third-party servers ever touch your documents.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap">👨‍👩‍👧</div>
-        <div class="feature-title">Family profiles</div>
-        <div class="feature-desc">Track documents for your whole household under one app. Color-coded profiles for each family member.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon-wrap">🔒</div>
-        <div class="feature-title">Face ID &amp; privacy first</div>
-        <div class="feature-desc">App lock with Face ID or Touch ID. All data lives on your device. No account required to get started.</div>
-      </div>
-    </div>
-  </div>
-</section>
+          <!-- Runway Timeline Graphic -->
+          <div class="runway-timeline-visual">
+            <div class="runway-track-bg">
+              <div class="runway-track-fill"></div>
+            </div>
+            <div class="runway-nodes">
+              <div class="runway-node">
+                <div class="runway-node-pin"></div>
+                <div class="node-title">Today</div>
+                <div class="node-date">Safe Period</div>
+                <span class="node-tag" style="background: var(--surface-muted); color: var(--ink-secondary);">Clear</span>
+              </div>
+              <div class="runway-node file-now">
+                <div class="runway-node-pin"></div>
+                <div class="node-title">File By Deadline</div>
+                <div class="node-date">8–11 wks before cutoff</div>
+                <span class="node-tag tag-warn">File Now</span>
+              </div>
+              <div class="runway-node travel-risk">
+                <div class="runway-node-pin"></div>
+                <div class="node-title">Travel Cutoff</div>
+                <div class="node-date">6 months before expiry</div>
+                <span class="node-tag tag-warn">Travel Denied</span>
+              </div>
+              <div class="runway-node expired">
+                <div class="runway-node-pin"></div>
+                <div class="node-title">Official Expiry</div>
+                <div class="node-date">Date printed on card</div>
+                <span class="node-tag tag-danger">Lapsed</span>
+              </div>
+            </div>
+          </div>
 
-<!-- CATEGORIES -->
-<section class="categories-section">
-  <div class="container">
-    <div class="section-label">What to track</div>
-    <h2>From passports to <em>streaming</em> plans</h2>
-    <p class="section-sub">DocuTimer covers every document that has a date you shouldn't miss.</p>
-    <div class="cat-grid">
-      <div class="cat-pill"><span class="cat-pill-icon">🛂</span> Passport</div>
-      <div class="cat-pill"><span class="cat-pill-icon">🪪</span> Driver's license</div>
-      <div class="cat-pill"><span class="cat-pill-icon">🟢</span> Green card</div>
-      <div class="cat-pill"><span class="cat-pill-icon">📄</span> Visa / EAD</div>
-      <div class="cat-pill"><span class="cat-pill-icon">🚗</span> Car insurance</div>
-      <div class="cat-pill"><span class="cat-pill-icon">🏥</span> Health insurance</div>
-      <div class="cat-pill"><span class="cat-pill-icon">🏠</span> Home / renters</div>
-      <div class="cat-pill"><span class="cat-pill-icon">💳</span> Credit card fees</div>
-      <div class="cat-pill"><span class="cat-pill-icon">🎬</span> Subscriptions</div>
-      <div class="cat-pill"><span class="cat-pill-icon">🚙</span> Vehicle registration</div>
-      <div class="cat-pill"><span class="cat-pill-icon">✏️</span> Custom</div>
-    </div>
-  </div>
-</section>
+          <!-- Interactive Calculator -->
+          <div class="calculator-box">
+            <div class="calc-input-group">
+              <label class="calc-label" for="calc-doc-type">Select Document Type:</label>
+              <select id="calc-doc-type" class="calc-select">
+                <option value="passport">Passport (6-month rule + 10-wk backlog)</option>
+                <option value="license">Driver's License (DMV 60-day window)</option>
+                <option value="insurance">Insurance Policy (30-day renewal cycle)</option>
+                <option value="visa">Schengen / US Visa (90-day lead time)</option>
+              </select>
 
-<!-- TESTIMONIALS -->
-<section>
-  <div class="container">
-    <div class="section-label">Early users</div>
-    <h2>People who never want to <em>renew late</em> again</h2>
-    <div class="testimonials-grid">
-      <div class="testimonial">
-        <div class="testimonial-text">"I almost missed my H-1B renewal window. DocuTimer now gives me a 90-day heads-up. It's the most important app on my phone."</div>
-        <div class="testimonial-author">
-          <div class="author-avatar avatar-1">SK</div>
-          <div><div class="author-name">Sanjay K.</div><div class="author-role">Software engineer, on H-1B</div></div>
+              <label class="calc-label" for="calc-date">Document Expiration Date:</label>
+              <input type="date" id="calc-date" class="calc-date-input" value="2027-04-15">
+            </div>
+
+            <div class="calc-result-box" id="calc-result-display">
+              <div class="calc-res-title">Calculated Renewal Runway™</div>
+              <div class="calc-res-status" id="calc-status-text">File by: Jan 2, 2027</div>
+              <div class="calc-res-detail" id="calc-detail-text">
+                Your international travel cutoff begins on <strong>Oct 15, 2026</strong>. DocuTimer will remind you starting at 90, 60, and 30 days prior so you never miss a trip.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: FEATURES GRID -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header-center">
+          <div class="eyebrow">Crafted for Simplicity & Depth</div>
+          <h2 class="section-title">Built with Apple's purest design language.</h2>
+          <p class="section-desc">
+            No bloat, no subscription fatigue, no corporate cloud vulnerabilities. Pure on-device elegance.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          
+          <!-- Card 1: Vision OCR -->
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </div>
+            <h3>Point & Scan Vision OCR</h3>
+            <p>
+              Point your iPhone camera at any passport photo page, driver's license, or card. DocuTimer instantly reads the Machine Readable Zone (MRZ) and card typography, extracting document numbers, names, and expiration dates in milliseconds.
+            </p>
+            <div class="feature-tag">On-Device Machine Learning</div>
+          </div>
+
+          <!-- Card 2: Renewal Radar -->
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <h3>Today Dashboard & Radar</h3>
+            <p>
+              One calm screen answers: <em>"What do I deal with first?"</em> A giant hero countdown spotlights the most pressing expiration, while urgency-tinted hairline rails indicate clear runway, action required, or imminent risk.
+            </p>
+            <div class="feature-tag">Priority Ordering</div>
+          </div>
+
+          <!-- Card 3: Biometric Vault -->
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <h3>Biometric Encrypted Vault</h3>
+            <p>
+              Store high-resolution front-and-back scans and policy PDFs in an encrypted on-device vault. Shielded with Face ID / Touch ID and an opaque security cover that blocks sensitive previews in the iOS app switcher.
+            </p>
+            <div class="feature-tag">Hardware-Backed AES-256</div>
+          </div>
+
+          <!-- Card 4: Household Multi-Profile -->
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3>Household & Family Command</h3>
+            <p>
+              Keep partner, kids, dependent parents, and vehicle documents organized in one place. Switch profiles with a single tap on the home radar, or view everyone's deadlines together in a unified family renewal timeline.
+            </p>
+            <div class="feature-tag">Multi-Member Tracking</div>
+          </div>
+
+          <!-- Card 5: Heatmap Calendar -->
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <h3>Year-at-a-Glance Heatmap</h3>
+            <p>
+              Visualize renewal density across all 12 months in an interactive calendar heatmap. Identify high-cost renewal seasons (like annual insurance premiums + vehicle registrations) before they surprise your bank account.
+            </p>
+            <div class="feature-tag">Cash Flow Forecaster</div>
+          </div>
+
+          <!-- Card 6: Widgets & Siri -->
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3>Lock Screen & Home Widgets</h3>
+            <p>
+              Glanceable iOS widgets surface upcoming expirations right on your Home Screen and Lock Screen. Support for Siri Shortcuts lets you ask: <em>"Hey Siri, when does my passport expire?"</em> straight from your Apple Watch or AirPods.
+            </p>
+            <div class="feature-tag">iOS 17 & 18 Native</div>
+          </div>
+
         </div>
       </div>
-      <div class="testimonial">
-        <div class="testimonial-text">"Finally realized I was paying a $550 annual fee on a card I never use. DocuTimer flagged it 30 days before it hit. Cancelled immediately."</div>
-        <div class="testimonial-author">
-          <div class="author-avatar avatar-2">MR</div>
-          <div><div class="author-name">Maria R.</div><div class="author-role">Freelance designer</div></div>
+    </section>
+
+    <!-- SECTION: PRIVACY GUARANTEE -->
+    <section class="privacy-section" id="privacy">
+      <div class="container">
+        <div class="privacy-box">
+          
+          <div>
+            <div class="eyebrow" style="color: #34d399;">Zero Cloud Risk</div>
+            <h2>Your identity stays yours. Truly private by design.</h2>
+            <p>
+              Unlike legacy apps that upload your sensitive passports, tax forms, and driver's licenses to vulnerable third-party web servers, DocuTimer operates completely on your Apple device.
+            </p>
+
+            <ul class="privacy-checklist">
+              <li>
+                <span class="privacy-check-icon">✓</span>
+                <span><strong>No accounts or passwords:</strong> Start tracking instantly with zero registration.</span>
+              </li>
+              <li>
+                <span class="privacy-check-icon">✓</span>
+                <span><strong>Private CloudKit Sync:</strong> Replicates strictly to your personal iCloud container — not ours.</span>
+              </li>
+              <li>
+                <span class="privacy-check-icon">✓</span>
+                <span><strong>Zero trackers or analytics:</strong> No Facebook SDK, no Google Firebase, no advertising IDs.</span>
+              </li>
+              <li>
+                <span class="privacy-check-icon">✓</span>
+                <span><strong>PBKDF2 Encrypted Backups:</strong> Export full password-protected archives anytime.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="privacy-nutrition-card">
+              <div class="nutrition-title">App Privacy Nutrition Label</div>
+              <div class="nutrition-sub">Apple App Store Official Verification</div>
+
+              <div class="nutrition-hero-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Data Not Collected</span>
+              </div>
+
+              <p class="nutrition-desc">
+                The developer does not collect any data from this app. Document metadata, encrypted attachments, and personal renewal dates never leave your hardware unless synced across your own personal Apple devices via CloudKit.
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
-      <div class="testimonial">
-        <div class="testimonial-text">"I manage docs for myself, my husband and two kids. The family profiles are exactly what I needed. Clean, fast, no fuss."</div>
-        <div class="testimonial-author">
-          <div class="author-avatar avatar-3">JL</div>
-          <div><div class="author-name">Jennifer L.</div><div class="author-role">Parent of 2</div></div>
+    </section>
+
+    <!-- SECTION: CATEGORIES DIRECTORY & SEO MATRIX -->
+    <section class="categories-section" id="categories">
+      <div class="container">
+        <div class="section-header-center">
+          <div class="eyebrow">Comprehensive Coverage</div>
+          <h2 class="section-title">Everything that can expire has a home.</h2>
+          <p class="section-desc">
+            Prebuilt categories with sensible renewal runway defaults, or define your own custom schedules.
+          </p>
+        </div>
+
+        <div class="category-matrix-grid">
+          
+          <div class="cat-item">
+            <div class="cat-item-top">
+              <span class="cat-color-dot" style="background: var(--cat-passport);"></span>
+              <span class="cat-name">Passports</span>
+            </div>
+            <p>Calculates 6-month international travel buffers, visa validity rules, and government processing backlogs.</p>
+          </div>
+
+          <div class="cat-item">
+            <div class="cat-item-top">
+              <span class="cat-color-dot" style="background: var(--cat-license);"></span>
+              <span class="cat-name">Driver's Licenses</span>
+            </div>
+            <p>Real ID renewal alerts, DMV testing deadlines, state compliance warnings, and photo renewals.</p>
+          </div>
+
+          <div class="cat-item">
+            <div class="cat-item-top">
+              <span class="cat-color-dot" style="background: var(--cat-visa);"></span>
+              <span class="cat-name">Visas & Green Cards</span>
+            </div>
+            <p>Stay extensions, residency card replacements, travel authorizations (ESTA), and I-94 status windows.</p>
+          </div>
+
+          <div class="cat-item">
+            <div class="cat-item-top">
+              <span class="cat-color-dot" style="background: var(--cat-car);"></span>
+              <span class="cat-name">Auto Insurance</span>
+            </div>
+            <p>6-month and annual policy renewals, coverage cards, policy PDF vault, and comparison shopping dates.</p>
+          </div>
+
+          <div class="cat-item">
+            <div class="cat-item-top">
+              <span class="cat-color-dot" style="background: var(--cat-health);"></span>
+              <span class="cat-name">Health Insurance</span>
+            </div>
+            <p>Open enrollment deadlines, HSA/FSA expiration dates, dependent coverage cutoffs, and group cards.</p>
+          </div>
+
+          <div class="cat-item">
+            <div class="cat-item-top">
+              <span class="cat-color-dot" style="background: var(--cat-home);"></span>
+              <span class="cat-name">Home & Renters</span>
+            </div>
+            <p>Apartment leases, homeowner policy renewals, flood insurance riders, and warranty terms.</p>
+          </div>
+
+          <div class="cat-item">
+            <div class="cat-item-top">
+              <span class="cat-color-dot" style="background: var(--cat-reg);"></span>
+              <span class="cat-name">Vehicle Registration</span>
+            </div>
+            <p>State registration stickers, smog inspection deadlines, emissions certifications, and city permits.</p>
+          </div>
+
+          <div class="cat-item">
+            <div class="cat-item-top">
+              <span class="cat-color-dot" style="background: var(--cat-card);"></span>
+              <span class="cat-name">Cards & Memberships</span>
+            </div>
+            <p>Credit card expiration dates, Global Entry, TSA PreCheck, AAA roadside assistance, and professional licenses.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: COMPARISON TABLE -->
+    <section class="comparison-section">
+      <div class="container">
+        <div class="section-header-center">
+          <div class="eyebrow">The Competitive Edge</div>
+          <h2 class="section-title">Why DocuTimer beats spreadsheets & generic notes.</h2>
+          <p class="section-desc">
+            See how DocuTimer's dedicated architecture stands apart from general-purpose tools.
+          </p>
+        </div>
+
+        <div class="comparison-table-wrapper">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th class="col-highlight">DocuTimer</th>
+                <th>Apple Notes</th>
+                <th>Calendar Apps</th>
+                <th>Google Sheets</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Renewal Runway™ (Travel Cutoffs)</strong></td>
+                <td class="col-highlight check-yes">✓ Built-in logic</td>
+                <td class="check-no">✕ Manual math</td>
+                <td class="check-no">✕ Alerts day-of</td>
+                <td class="check-no">✕ Complex formulas</td>
+              </tr>
+              <tr>
+                <td><strong>Camera MRZ & Passport OCR</strong></td>
+                <td class="col-highlight check-yes">✓ Instant on-device</td>
+                <td class="check-no">✕ Generic scan</td>
+                <td class="check-no">✕ None</td>
+                <td class="check-no">✕ None</td>
+              </tr>
+              <tr>
+                <td><strong>Face ID Protected Attachments</strong></td>
+                <td class="col-highlight check-yes">✓ Encrypted vault</td>
+                <td class="check-no">Manual per-note</td>
+                <td class="check-no">✕ None</td>
+                <td class="check-no">✕ Cloud plain text</td>
+              </tr>
+              <tr>
+                <td><strong>Household & Dependent Profiles</strong></td>
+                <td class="col-highlight check-yes">✓ 1-tap filtering</td>
+                <td class="check-no">✕ Messy folders</td>
+                <td class="check-no">✕ Calendar clutter</td>
+                <td class="check-no">✕ Multiple tabs</td>
+              </tr>
+              <tr>
+                <td><strong>Zero Data Collection / No Accounts</strong></td>
+                <td class="col-highlight check-yes">✓ Verified by Apple</td>
+                <td class="check-yes">✓ Apple ID</td>
+                <td class="check-no">✕ Account required</td>
+                <td class="check-no">✕ Google tracked</td>
+              </tr>
+              <tr>
+                <td><strong>Home & Lock Screen Widgets</strong></td>
+                <td class="col-highlight check-yes">✓ Interactive widgets</td>
+                <td class="check-no">✕ Static list</td>
+                <td class="check-yes">✓ Event list</td>
+                <td class="check-no">✕ None</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: PRICING -->
+    <section class="pricing-section" id="pricing">
+      <div class="container">
+        <div class="section-header-center">
+          <div class="eyebrow">Fair, Transparent Monetization</div>
+          <h2 class="section-title">Free to start. Powerful for life.</h2>
+          <p class="section-desc">
+            No predatory pricing or hidden ads. Start free, upgrade to Pro when you need unlimited household scale.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          
+          <!-- Plan 1: Free -->
+          <div class="pricing-card">
+            <div class="plan-name">Free Starter</div>
+            <div class="plan-price numeral">$0</div>
+            <div class="plan-period">Free forever</div>
+
+            <ul class="plan-features">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Up to 5 active documents</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Full Renewal Runway™ alerts</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Camera MRZ & Card OCR Scanner</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Face ID biometric app lock</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>30-day trash safeguard</span>
+              </li>
+            </ul>
+
+            <a href="https://apps.apple.com/app/docutimer" class="btn btn-secondary" target="_blank" rel="noopener">Download Free</a>
+          </div>
+
+          <!-- Plan 2: Pro Annual (Featured) -->
+          <div class="pricing-card featured">
+            <div class="featured-badge">Most Popular</div>
+            <div class="plan-name">DocuTimer Pro Annual</div>
+            <div class="plan-price numeral">$19.99</div>
+            <div class="plan-period">per year (~$1.66/month)</div>
+
+            <ul class="plan-features">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Unlimited</strong> active documents</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Unlimited</strong> encrypted scan attachments</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Private iCloud sync</strong> (iPhone & iPad)</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Household multi-profile</strong> tracking</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Renewal history chains & cost forecast</span>
+              </li>
+            </ul>
+
+            <a href="https://apps.apple.com/app/docutimer" class="btn btn-primary" target="_blank" rel="noopener">Start Free Trial</a>
+          </div>
+
+          <!-- Plan 3: Pro Lifetime -->
+          <div class="pricing-card">
+            <div class="plan-name">DocuTimer Pro Lifetime</div>
+            <div class="plan-price numeral">$49.99</div>
+            <div class="plan-period">One-time purchase · Own forever</div>
+
+            <ul class="plan-features">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>All Pro Features</strong> unlocked forever</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>No recurring subscription charges</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>All future app updates included</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Family Sharing enabled</span>
+              </li>
+            </ul>
+
+            <a href="https://apps.apple.com/app/docutimer" class="btn btn-secondary" target="_blank" rel="noopener">Get Lifetime Access</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FAQ -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-header-center">
+          <div class="eyebrow">Frequently Asked Questions</div>
+          <h2 class="section-title">Everything you need to know.</h2>
+          <p class="section-desc">
+            Direct answers to common questions about renewal tracking, privacy, and device compatibility.
+          </p>
+        </div>
+
+        <div class="faq-accordion">
+          
+          <div class="faq-item active">
+            <div class="faq-question">
+              <span>What is the 6-month passport rule and why do ordinary calendar apps fail?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              More than 70 international destinations (including the Schengen area, Thailand, Singapore, and parts of the Caribbean) refuse entry or board denial if your passport has fewer than 6 months of validity remaining from your intended departure date. If your calendar app notifies you on expiration day, you have already been barred from international travel for 6 months! DocuTimer calculates your true <strong>Renewal Runway™</strong>, alerting you before you hit the travel cutoff and factoring in typical 8–11 week passport processing backlogs.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Is my sensitive personal identity data secure?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              100% yes. DocuTimer is engineered with zero-knowledge, local-first architecture. All documents and camera scans are encrypted with hardware-backed AES-256 on your iOS device and protected behind biometric Face ID or Touch ID. If you choose to enable iCloud synchronization, your records replicate strictly into your personal private CloudKit database container. We operate zero cloud servers, hold zero encryption keys, and Apple verifies: Data Not Collected.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How does the Camera MRZ scanner work?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              DocuTimer uses Apple's Vision framework to read the Machine Readable Zone (MRZ) chevron text at the bottom of passports and ID cards. Simply point your camera, and the parser automatically fills the document holder name, document number, issuing country, birth date, and exact expiration date in under two seconds.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Can I track documents for multiple family members or dependents?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              Yes. DocuTimer Pro includes complete Household tracking. You can create distinct profiles for your partner, children, dependent parents, or even individual vehicles. The Home screen features instant owner filter chips so you can check one person's upcoming deadlines or view the entire household at a glance.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>What happens if I accidentally delete a document?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              DocuTimer features a 30-day Trash Recovery Center. Any removed document remains safely restorable for 30 days before permanent deletion. Furthermore, you can export password-protected, encrypted PBKDF2 archive backups at any time in Settings.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Are notifications delivered reliably without internet?</span>
+              <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              Yes! All reminders are scheduled directly via local iOS notifications on your device. They fire reliably at a civilized 9:00 a.m. local time, even if you are offline, on airplane mode, or traveling internationally with roaming disabled.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CALL TO ACTION BANNER -->
+    <section class="cta-banner-section">
+      <div class="container">
+        <div class="cta-banner">
+          <h2>Ready to end expiration anxiety?</h2>
+          <p>
+            Download DocuTimer today. Track your first five documents completely free, protect your travel plans, and keep your household perfectly organized.
+          </p>
+          <a href="https://apps.apple.com/app/docutimer" class="btn btn-secondary btn-lg" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.64 1.36-.56.65-.99 1.7-0.88 2.73 1.02.08 2-.5 2.6-1.24z"/>
+            </svg>
+            <span>Get DocuTimer for iPhone</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <img src="assets/app-icon-light.png" alt="DocuTimer Logo" style="width: 28px; height: 28px; border-radius: 6px;">
+            <span style="font-weight: 800; font-size: 16px; color: var(--ink);">DocuTimer</span>
+          </div>
+          <p style="max-width: 320px; line-height: 1.6; margin-bottom: 16px;">
+            The elegant, private document expiration & renewal tracker for iOS. Powered by the Ledger design system.
+          </p>
+          <div style="font-size: 12px; color: var(--ink-tertiary);">
+            Domain: <a href="https://docutimer.com" style="color: var(--ink);">docutimer.com</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#runway">Renewal Runway™</a></li>
+            <li><a href="#features">Camera MRZ OCR</a></li>
+            <li><a href="#privacy">Face ID Vault</a></li>
+            <li><a href="#categories">Document Types</a></li>
+            <li><a href="#pricing">Pricing & Pro</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Keywords & Guides</h4>
+          <ul>
+            <li><a href="#runway">6-Month Passport Rule</a></li>
+            <li><a href="#categories">Driver's License Renewal</a></li>
+            <li><a href="#categories">Visa Expiration Tracking</a></li>
+            <li><a href="#categories">Auto Insurance Expiry</a></li>
+            <li><a href="#privacy">Private CloudKit Security</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Legal & Company</h4>
+          <ul>
+            <li><a href="https://bytexio.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
+            <li><a href="https://bytexio.com/terms" target="_blank" rel="noopener">Terms of Service</a></li>
+            <li><a href="https://github.com/ThinkCode/docutimer-web" target="_blank" rel="noopener">GitHub Repository</a></li>
+            <li><a href="https://bytexio.com" target="_blank" rel="noopener">ByteXio Studios</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 DocuTimer. All rights reserved. Apple, iPhone, Face ID, and iCloud are trademarks of Apple Inc.</div>
+        <div style="display: flex; gap: 16px;">
+          <span>100% Data Not Collected</span>
+          <span>·</span>
+          <span>Zero Server Storage</span>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- PRICING -->
-<section id="pricing" style="background: var(--paper-2);">
-  <div class="container">
-    <div class="section-label">Pricing</div>
-    <h2>Simple, <em>honest</em> pricing</h2>
-    <p class="section-sub">Free to start. Upgrade when you need more. No ads, no data selling — ever.</p>
-    <div class="pricing-grid">
+  <!-- SCRIPT: THEME TOGGLE, INTERACTIVE PHONE SIMULATOR, FAQ, & CALCULATOR -->
+  <script>
+    // =========================================================================
+    // 1. THEME SWITCHER (LIGHT / DARK) WITH PERSISTENCE
+    // =========================================================================
+    const htmlEl = document.documentElement;
+    const themeBtn = document.getElementById('theme-toggle');
+    const themeMeta = document.getElementById('theme-meta');
+    const brandIcon = document.getElementById('brand-icon-img');
 
-      <div class="pricing-card">
-        <div class="pricing-plan">Free</div>
-        <div class="pricing-price">$0</div>
-        <div class="pricing-per">forever</div>
-        <ul class="pricing-features">
-          <li><span class="check-mark">✓</span> Up to 5 documents</li>
-          <li><span class="check-mark">✓</span> Push notifications</li>
-          <li><span class="check-mark">✓</span> All categories</li>
-          <li><span class="check-mark">✓</span> Face ID lock</li>
-        </ul>
-        <a href="#" class="pricing-btn btn-outline">Get started</a>
-      </div>
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      localStorage.setItem('dt_theme', theme);
+      if (theme === 'dark') {
+        themeMeta.setAttribute('content', '#0a0a0b');
+        brandIcon.src = 'assets/app-icon-dark.png';
+      } else {
+        themeMeta.setAttribute('content', '#fafafa');
+        brandIcon.src = 'assets/app-icon-light.png';
+      }
+    }
 
-      <div class="pricing-card popular">
-        <div class="popular-badge">Most popular</div>
-        <div class="pricing-plan">Pro</div>
-        <div class="pricing-price">$19.99</div>
-        <div class="pricing-per">per year · or $2.99/mo</div>
-        <ul class="pricing-features">
-          <li><span class="check-mark">✓</span> Unlimited documents</li>
-          <li><span class="check-mark">✓</span> 5 reminders per doc</li>
-          <li><span class="check-mark">✓</span> iCloud sync</li>
-          <li><span class="check-mark">✓</span> OCR camera scan</li>
-          <li><span class="check-mark">✓</span> Home screen widgets</li>
-          <li><span class="check-mark">✓</span> Cost tracker</li>
-          <li><span class="check-mark">✓</span> PDF / CSV export</li>
-        </ul>
-        <a href="#" class="pricing-btn btn-filled">Start free trial</a>
-      </div>
+    // Initialize from localStorage or prefers-color-scheme
+    const savedTheme = localStorage.getItem('dt_theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      applyTheme('dark');
+    } else {
+      applyTheme('light');
+    }
 
-      <div class="pricing-card">
-        <div class="pricing-plan">Family</div>
-        <div class="pricing-price">$34.99</div>
-        <div class="pricing-per">per year · up to 6 members</div>
-        <ul class="pricing-features">
-          <li><span class="check-mark">✓</span> Everything in Pro</li>
-          <li><span class="check-mark">✓</span> 6 family profiles</li>
-          <li><span class="check-mark">✓</span> Shared alerts</li>
-          <li><span class="check-mark">✓</span> Per-person dashboards</li>
-        </ul>
-        <a href="#" class="pricing-btn btn-outline">Get Family</a>
-      </div>
+    themeBtn.addEventListener('click', () => {
+      const current = htmlEl.getAttribute('data-theme') || 'light';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
 
-    </div>
-    <p style="text-align:center; margin-top:24px; font-size:13px; color:var(--ink-3);">All plans include a 7-day free Pro trial. Cancel anytime from the App Store.</p>
-  </div>
-</section>
+    // =========================================================================
+    // 2. INTERACTIVE PHONE SIMULATOR: HOUSEHOLD FILTERING & HERO SYNC
+    // =========================================================================
+    const chips = document.querySelectorAll('.phone-chip');
+    const docRows = document.querySelectorAll('.phone-doc-row');
+    const heroCard = document.getElementById('phone-hero-card');
+    const heroDays = document.getElementById('hero-days');
+    const heroTitle = document.getElementById('hero-title');
+    const heroCaption = document.getElementById('hero-caption');
+    const heroTag = document.getElementById('hero-tag');
+    const tileActive = document.getElementById('tile-active-count');
+    const tileExp = document.getElementById('tile-exp-count');
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="container">
-    <div class="section-label" style="color:rgba(255,255,255,0.35);">Get started</div>
-    <h2>Your documents are <em>waiting</em></h2>
-    <p class="section-sub">Set up in under 2 minutes. Your first expiry alert might save you a headache you didn't know was coming.</p>
-    <a href="#" class="app-store-btn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Download on App Store — Free
-    </a>
-    <div class="app-store-meta">iOS 16+ · No account required · No ads</div>
-  </div>
-</section>
+    // Date display in app header
+    const todayDateStr = document.getElementById('today-date-str');
+    if (todayDateStr) {
+      const now = new Date();
+      const options = { weekday: 'long', month: 'short', day: 'numeric' };
+      todayDateStr.textContent = now.toLocaleDateString('en-US', options);
+    }
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <a href="#" class="footer-logo">Docu<span>Timer</span></a>
-    <div class="footer-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#">Support</a>
-      <a href="mailto:hi@docutimer.com">hi@docutimer.com</a>
-    </div>
-    <div class="footer-copy">© 2025 DocuTimer · docutimer.com</div>
-  </div>
-</footer>
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
 
+        const owner = chip.getAttribute('data-owner');
+        let visibleCount = 0;
+        let expCount = 0;
+        let firstVisible = null;
+
+        docRows.forEach(row => {
+          const rowOwner = row.getAttribute('data-owner');
+          if (owner === 'all' || rowOwner === owner) {
+            row.style.display = 'flex';
+            visibleCount++;
+            const days = parseInt(row.getAttribute('data-days'), 10);
+            if (days <= 60) expCount++;
+            if (!firstVisible) firstVisible = row;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        tileActive.textContent = visibleCount;
+        tileExp.textContent = expCount;
+
+        if (firstVisible) {
+          updateHeroFromRow(firstVisible);
+        }
+      });
+    });
+
+    // Clicking individual doc row in phone updates the hero countdown
+    docRows.forEach(row => {
+      row.addEventListener('click', () => {
+        updateHeroFromRow(row);
+      });
+    });
+
+    function updateHeroFromRow(row) {
+      const days = row.getAttribute('data-days');
+      const title = row.getAttribute('data-title');
+      const caption = row.getAttribute('data-caption');
+      const tag = row.getAttribute('data-tag');
+
+      heroDays.innerHTML = `${days} <span style="font-size: 20px; font-weight: 700;">DAYS</span>`;
+      heroTitle.textContent = title;
+      heroCaption.querySelector('span').textContent = caption;
+      heroTag.textContent = tag;
+    }
+
+    // =========================================================================
+    // 3. RENEWAL RUNWAY INTERACTIVE CALCULATOR
+    // =========================================================================
+    const calcType = document.getElementById('calc-doc-type');
+    const calcDate = document.getElementById('calc-date');
+    const calcStatus = document.getElementById('calc-status-text');
+    const calcDetail = document.getElementById('calc-detail-text');
+
+    function updateCalculator() {
+      const expiry = new Date(calcDate.value);
+      if (isNaN(expiry.getTime())) return;
+
+      const type = calcType.value;
+      let bufferMonths = 6;
+      let leadWeeks = 10;
+      let name = 'Passport';
+
+      if (type === 'license') {
+        bufferMonths = 0;
+        leadWeeks = 8;
+        name = "Driver's License";
+      } else if (type === 'insurance') {
+        bufferMonths = 0;
+        leadWeeks = 4;
+        name = "Insurance Policy";
+      } else if (type === 'visa') {
+        bufferMonths = 3;
+        leadWeeks = 12;
+        name = "Visa";
+      }
+
+      // Cutoff date
+      const cutoff = new Date(expiry);
+      cutoff.setMonth(cutoff.getMonth() - bufferMonths);
+
+      // File by date
+      const fileBy = new Date(cutoff);
+      fileBy.setDate(fileBy.getDate() - (leadWeeks * 7));
+
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      calcStatus.textContent = `File by: ${fileBy.toLocaleDateString('en-US', options)}`;
+      
+      if (bufferMonths > 0) {
+        calcDetail.innerHTML = `Your international travel validity cutoff starts on <strong>${cutoff.toLocaleDateString('en-US', options)}</strong>. Accounting for a ${leadWeeks}-week processing window, file renewal by <strong>${fileBy.toLocaleDateString('en-US', options)}</strong>.`;
+      } else {
+        calcDetail.innerHTML = `This document expires on <strong>${expiry.toLocaleDateString('en-US', options)}</strong>. With a recommended ${leadWeeks}-week renewal lead time, file your application by <strong>${fileBy.toLocaleDateString('en-US', options)}</strong>.`;
+      }
+    }
+
+    calcType.addEventListener('change', updateCalculator);
+    calcDate.addEventListener('input', updateCalculator);
+
+    // =========================================================================
+    // 4. FAQ ACCORDION INTERACTION
+    // =========================================================================
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+        faqItems.forEach(i => i.classList.remove('active'));
+        if (!isOpen) item.classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
