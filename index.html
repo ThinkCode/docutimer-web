@@ -75,7 +75,7 @@
       "Encrypted on-device vault with Face ID / Touch ID lock",
       "Private CloudKit synchronization with zero data collection",
       "Multi-member household and dependent tracking",
-      "Interactive home screen & lock screen widgets",
+      "Home screen & lock screen widgets",
       "Year-at-a-glance renewal calendar heatmap",
       "Subscription and policy renewal cost forecasting"
     ]
@@ -101,7 +101,7 @@
         "name": "Is my personal identification data safe with DocuTimer?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "DocuTimer is private by design. Your documents and attachments are encrypted locally on your iPhone using hardware-backed AES encryption and locked behind Face ID or Touch ID. When iCloud sync is enabled, records are replicated strictly to your personal private CloudKit database. DocuTimer has no servers, no user accounts, no analytics, and Apple's App Store privacy label verifies: Data Not Collected."
+          "text": "DocuTimer is private by design. Your documents and attachments are encrypted locally on your iPhone with AES-256-GCM, using a key kept in the iOS Keychain, and can be locked behind Face ID or Touch ID. When iCloud sync is enabled, records are replicated strictly to your personal private CloudKit database. DocuTimer has no servers, no user accounts and no analytics, and its App Store privacy label declares: Data Not Collected."
         }
       },
       {
@@ -2207,7 +2207,7 @@
             </div>
             <h3>Lock Screen & Home Widgets</h3>
             <p>
-              Glanceable iOS widgets surface upcoming expirations right on your Home Screen and Lock Screen. Support for Siri Shortcuts lets you ask: <em>"Hey Siri, when does my passport expire?"</em> straight from your Apple Watch or AirPods.
+              Glanceable iOS widgets surface upcoming expirations right on your Home Screen and Lock Screen. Siri Shortcuts let you ask hands-free: <em>"Hey Siri, what's next to expire in DocuTimer?"</em>
             </p>
             <div class="feature-tag">iOS 17 & 18 Native</div>
           </div>
@@ -2222,7 +2222,7 @@
         <div class="privacy-box">
           
           <div>
-            <div class="eyebrow" style="color: #34d399;">Zero Cloud Risk</div>
+            <div class="eyebrow" style="color: #34d399;">Private by design</div>
             <h2>Your identity stays yours. Truly private by design.</h2>
             <p>
               Unlike legacy apps that upload your sensitive passports, tax forms, and driver's licenses to vulnerable third-party web servers, DocuTimer operates completely on your Apple device.
@@ -2251,7 +2251,7 @@
           <div>
             <div class="privacy-nutrition-card">
               <div class="nutrition-title">App Privacy Nutrition Label</div>
-              <div class="nutrition-sub">Apple App Store Official Verification</div>
+              <div class="nutrition-sub">As declared on the App Store</div>
 
               <div class="nutrition-hero-badge">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -2404,14 +2404,14 @@
               </tr>
               <tr>
                 <td><strong>Zero Data Collection / No Accounts</strong></td>
-                <td class="col-highlight check-yes">✓ Verified by Apple</td>
+                <td class="col-highlight check-yes">✓ Data Not Collected</td>
                 <td class="check-yes">✓ Apple ID</td>
                 <td class="check-no">✕ Account required</td>
                 <td class="check-no">✕ Google tracked</td>
               </tr>
               <tr>
                 <td><strong>Home & Lock Screen Widgets</strong></td>
-                <td class="col-highlight check-yes">✓ Interactive widgets</td>
+                <td class="col-highlight check-yes">✓ Home & Lock Screen</td>
                 <td class="check-no">✕ Static list</td>
                 <td class="check-yes">✓ Event list</td>
                 <td class="check-no">✕ None</td>
@@ -2429,7 +2429,7 @@
           <div class="eyebrow">Fair, Transparent Monetization</div>
           <h2 class="section-title">Free to start. Powerful for life.</h2>
           <p class="section-desc">
-            No predatory pricing or hidden ads. Start free, upgrade to Pro when you need unlimited household scale.
+            No predatory pricing or hidden ads. Start free, upgrade to Pro when you need to track more than five documents.
           </p>
         </div>
 
@@ -2481,23 +2481,15 @@
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Unlimited</strong> encrypted scan attachments</span>
+                <span>Everything else stays free: iCloud sync, households, encrypted scans, widgets</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Private iCloud sync</strong> (iPhone & iPad)</span>
-              </li>
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Household multi-profile</strong> tracking</span>
-              </li>
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Renewal history chains & cost forecast</span>
+                <span>Cancel anytime in Settings on your iPhone</span>
               </li>
             </ul>
 
-            <a href="https://apps.apple.com/app/docutimer" class="btn btn-primary" target="_blank" rel="noopener">Start Free Trial</a>
+            <a href="https://apps.apple.com/app/docutimer" class="btn btn-primary" target="_blank" rel="noopener">Subscribe</a>
           </div>
 
           <!-- Plan 3: Pro Lifetime -->
@@ -2519,10 +2511,7 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 <span>All future app updates included</span>
               </li>
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Family Sharing enabled</span>
-              </li>
+
             </ul>
 
             <a href="https://apps.apple.com/app/docutimer" class="btn btn-secondary" target="_blank" rel="noopener">Get Lifetime Access</a>
@@ -2561,7 +2550,7 @@
               <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
             <div class="faq-answer">
-              100% yes. DocuTimer is engineered with zero-knowledge, local-first architecture. All documents and camera scans are encrypted with hardware-backed AES-256 on your iOS device and protected behind biometric Face ID or Touch ID. If you choose to enable iCloud synchronization, your records replicate strictly into your personal private CloudKit database container. We operate zero cloud servers, hold zero encryption keys, and Apple verifies: Data Not Collected.
+              DocuTimer is local-first. Scans and attachments are encrypted on your iOS device with AES-256-GCM, using a key kept in the iOS Keychain, and the app can be locked behind Face ID or Touch ID. iCloud sync is optional and off by default; if you turn it on, your records are copied into your own private CloudKit database. We operate no servers, hold no encryption keys, and the App Store privacy label we declared is: Data Not Collected.
             </div>
           </div>
 
